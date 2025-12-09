@@ -103,7 +103,28 @@ export default function Index() {
                 dedicated to building resilient, inclusive, and empowered communities across
                 Sierra Leone.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
+              {/* Mobile-only CTA buttons */}
+              <div className="flex flex-col gap-3 w-full max-w-xs justify-center items-center mx-auto sm:hidden">
+                <Link to="/programs" className="w-full">
+                  <Button size="lg" className="w-full bg-primary hover:bg-primary/90 gap-2">
+                    Explore Our Programs
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to="/get-involved" className="w-full">
+                  <Button size="lg" variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    Get Involved
+                  </Button>
+                </Link>
+                <Link to="/donate" className="w-full">
+                  <Button size="lg" className="w-full bg-accent hover:bg-accent/90 gap-2">
+                    <Heart className="h-4 w-4" />
+                    Donate Now
+                  </Button>
+                </Link>
+              </div>
+              {/* Desktop/Tablet CTA buttons (hidden on mobile) */}
+              <div className="hidden sm:flex flex-row gap-4 w-full max-w-xs sm:max-w-none justify-center items-center sm:items-stretch mx-auto">
                 <Link to="/programs" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 gap-2">
                     Explore Our Programs
