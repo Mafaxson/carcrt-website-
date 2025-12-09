@@ -144,14 +144,16 @@ export default function Events() {
                         {filteredEvents[0].title}
                       </h2>
                       <div className="flex items-center gap-4 text-sm opacity-90">
-                        {(filteredEvents[0].dateFrom || filteredEvents[0].dateTo) && (
+                        {filteredEvents[0].date && (
                           <span className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
-                            {filteredEvents[0].dateFrom && filteredEvents[0].dateTo
-                              ? (filteredEvents[0].dateFrom === filteredEvents[0].dateTo 
-                                  ? filteredEvents[0].dateFrom 
-                                  : `${filteredEvents[0].dateFrom} - ${filteredEvents[0].dateTo}`)
-                              : (filteredEvents[0].dateFrom || filteredEvents[0].dateTo)}
+                            {new Date(filteredEvents[0].date).toLocaleDateString()}
+                          </span>
+                        )}
+                        {filteredEvents[0].time && (
+                          <span className="flex items-center gap-2">
+                            <Clock className="h-4 w-4" />
+                            {filteredEvents[0].time}
                           </span>
                         )}
                         <span className="flex items-center gap-2">
@@ -172,20 +174,15 @@ export default function Events() {
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                     </Link>
-                    {filteredEvents[0].registrationLink && (
+                    {filteredEvents[0].registration_link && (
                       <a 
-                        href={filteredEvents[0].registrationLink} 
+                        href={filteredEvents[0].registration_link} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-sm text-muted-foreground hover:text-primary mt-2 inline-flex items-center gap-1 ml-4"
                       >
                         Register for this event
                       </a>
-                    )}
-                    {!filteredEvents[0].registrationLink && filteredEvents[0].registrationNote && (
-                      <p className="text-sm text-muted-foreground italic mt-2 ml-4 inline-block">
-                        {filteredEvents[0].registrationNote}
-                      </p>
                     )}
                   </div>
                 </div>
@@ -248,13 +245,11 @@ export default function Events() {
                       <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
                         {event.status.charAt(0).toUpperCase() + event.status.slice(1)} Event
                       </span>
-                      {(event.dateFrom || event.dateTo) && (
+                      {event.date && (
                         <>
                           <span className="text-muted-foreground">•</span>
                           <span className="text-muted-foreground">
-                            {event.dateFrom && event.dateTo
-                              ? (event.dateFrom === event.dateTo ? event.dateFrom : `${event.dateFrom} - ${event.dateTo}`)
-                              : (event.dateFrom || event.dateTo)}
+                            {new Date(event.date).toLocaleDateString()}
                           </span>
                         </>
                       )}
@@ -266,6 +261,12 @@ export default function Events() {
                       <MapPin className="h-4 w-4" />
                       <span>{event.location}</span>
                     </div>
+                    {event.time && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                        <Clock className="h-4 w-4" />
+                        <span>{event.time}</span>
+                      </div>
+                    )}
                     <p className="text-muted-foreground mb-4 line-clamp-3">{event.description}</p>
                     <div className="flex flex-col gap-2">
                       <Link to={`/events/${event.id}`}>
@@ -274,9 +275,9 @@ export default function Events() {
                           <ArrowRight className="h-4 w-4" />
                         </Button>
                       </Link>
-                      {event.applicationPdf && (
+                      {event.application_pdf && (
                         <a 
-                          href={getImageUrl(event.applicationPdf)} 
+                          href={getImageUrl(event.application_pdf)} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-sm text-primary hover:text-primary/80 text-center font-medium flex items-center justify-center gap-1"
@@ -285,18 +286,15 @@ export default function Events() {
                           Download Application Form
                         </a>
                       )}
-                      {event.registrationLink && !event.applicationPdf && (
+                      {event.registration_link && !event.application_pdf && (
                         <a 
-                          href={event.registrationLink} 
+                          href={event.registration_link} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-sm text-primary hover:text-primary/80 text-center font-medium"
                         >
                           Register for this event →
                         </a>
-                      )}
-                      {!event.registrationLink && !event.applicationPdf && event.registrationNote && (
-                        <p className="text-sm text-muted-foreground italic text-center bg-muted px-3 py-2 rounded">{event.registrationNote}</p>
                       )}
                     </div>
                   </CardContent>

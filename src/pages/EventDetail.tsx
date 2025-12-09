@@ -12,16 +12,14 @@ interface Event {
   id: string;
   title: string;
   date?: string;
-  dateFrom?: string;
-  dateTo?: string;
+  time?: string;
   location: string;
   description: string;
   status: string;
   image?: string;
-  registrationLink?: string;
-  registrationNote?: string;
-  applicationPdf?: string;
-  applicationEmail?: string;
+  registration_link?: string;
+  application_pdf?: string;
+  category?: string;
 }
 
 const EventDetail = () => {
@@ -105,10 +103,8 @@ const EventDetail = () => {
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
                 <span className="text-lg">
-                  {event.dateFrom === event.dateTo 
-                    ? new Date(event.dateFrom).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-                    : `${new Date(event.dateFrom).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} - ${new Date(event.dateTo).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
-                  }
+                  {event.date && new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                  {event.time && ` at ${event.time}`}
                 </span>
               </div>
               {event.location && (
@@ -140,17 +136,17 @@ const EventDetail = () => {
             {/* Registration Section */}
             {event.status === "upcoming" && (
               <div className="bg-primary/10 rounded-lg p-6 mb-8">
-                {event.applicationPdf ? (
+                {event.application_pdf ? (
                   <>
                     <h3 className="font-semibold text-xl mb-4 text-center">Application Process</h3>
                     <div className="space-y-4">
                       <div className="bg-card rounded-lg p-4 border">
                         <p className="text-muted-foreground mb-4">
-                          Download the application form, fill it out, and send it to us via email.
+                          Download the application form to register for this event.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                           <a
-                            href={getImageUrl(event.applicationPdf)}
+                            href={getImageUrl(event.application_pdf)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex"
@@ -160,26 +156,15 @@ const EventDetail = () => {
                               Download Application Form
                             </Button>
                           </a>
-                          {event.applicationEmail && (
-                            <a
-                              href={`mailto:${event.applicationEmail}?subject=Application for ${event.title}`}
-                              className="inline-flex"
-                            >
-                              <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                                <Mail className="h-5 w-5" />
-                                {event.applicationEmail}
-                              </Button>
-                            </a>
-                          )}
                         </div>
                       </div>
                     </div>
                   </>
-                ) : event.registrationLink ? (
+                ) : event.registration_link ? (
                   <div className="text-center">
                     <h3 className="font-semibold text-xl mb-4">Ready to Join Us?</h3>
                     <a
-                      href={event.registrationLink}
+                      href={event.registration_link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -189,8 +174,6 @@ const EventDetail = () => {
                       </Button>
                     </a>
                   </div>
-                ) : event.registrationNote ? (
-                  <p className="text-lg text-muted-foreground italic text-center">{event.registrationNote}</p>
                 ) : null}
               </div>
             )}

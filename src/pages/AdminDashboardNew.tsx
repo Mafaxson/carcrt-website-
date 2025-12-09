@@ -39,6 +39,7 @@ export default function AdminDashboardNew() {
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const [currentTable, setCurrentTable] = useState("");
 
   // Fetch stats on load
   useEffect(() => {
@@ -159,9 +160,240 @@ export default function AdminDashboardNew() {
     }
   };
 
+  // Edit Item
+  const handleEdit = (table: string, item: any) => {
+    setCurrentTable(table);
+    setEditingItem({ ...item });
+    setIsDialogOpen(true);
+  };
+
+  // Save Edit
+  const handleSaveEdit = async () => {
+    if (!editingItem || !currentTable) return;
+
+    try {
+      const { error } = await supabase
+        .from(currentTable)
+        .update(editingItem)
+        .eq("id", editingItem.id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: "Item updated successfully",
+      });
+
+      setIsDialogOpen(false);
+      setEditingItem(null);
+      setCurrentTable("");
+      fetchAllData();
+      fetchStats();
+    } catch (error) {
+      console.error("Error updating:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update item",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Update form field
+  const updateField = (field: string, value: any) => {
+    setEditingItem((prev: any) => ({ ...prev, [field]: value }));
+  };
+
   // Dashboard Screen
   return (
     <Layout>
+      {/* Edit Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Edit {currentTable.slice(0, -1)}</DialogTitle>
+          </DialogHeader>
+          {editingItem && (
+            <div className="space-y-4">
+              {/* Partners Form */}
+              {currentTable === "partners" && (
+                <>
+                  <div>
+                    <Label>Name</Label>
+                    <Input
+                      value={editingItem.name || ""}
+                      onChange={(e) => updateField("name", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Description</Label>
+                    <Textarea
+                      value={editingItem.description || ""}
+                      onChange={(e) => updateField("description", e.target.value)}
+                      rows={3}
+                    />
+                  </div>
+                  <div>
+                    <Label>Website</Label>
+                    <Input
+                      value={editingItem.website || ""}
+                      onChange={(e) => updateField("website", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Type</Label>
+                    <Input
+                      value={editingItem.type || ""}
+                      onChange={(e) => updateField("type", e.target.value)}
+                      placeholder="partner or sponsor"
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* News Form */}
+              {currentTable === "news" && (
+                <>
+                  <div>
+                    <Label>Title</Label>
+                    <Input
+                      value={editingItem.title || ""}
+                      onChange={(e) => updateField("title", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Content</Label>
+                    <Textarea
+                      value={editingItem.content || ""}
+                      onChange={(e) => updateField("content", e.target.value)}
+                      rows={6}
+                    />
+                  </div>
+                  <div>
+                    <Label>Category</Label>
+                    <Input
+                      value={editingItem.category || ""}
+                      onChange={(e) => updateField("category", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Author</Label>
+                    <Input
+                      value={editingItem.author || ""}
+                      onChange={(e) => updateField("author", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Date</Label>
+                    <Input
+                      type="date"
+                      value={editingItem.date || ""}
+                      onChange={(e) => updateField("date", e.target.value)}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Events Form */}
+              {currentTable === "events" && (
+                <>
+                  <div>
+                    <Label>Title</Label>
+                    <Input
+                      value={editingItem.title || ""}
+                      onChange={(e) => updateField("title", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Description</Label>
+                    <Textarea
+                      value={editingItem.description || ""}
+                      onChange={(e) => updateField("description", e.target.value)}
+                      rows={4}
+                    />
+                  </div>
+                  <div>
+                    <Label>Date</Label>
+                    <Input
+                      type="date"
+                      value={editingItem.date || ""}
+                      onChange={(e) => updateField("date", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Time</Label>
+                    <Input
+                      value={editingItem.time || ""}
+                      onChange={(e) => updateField("time", e.target.value)}
+                      placeholder="e.g. 2:00 PM - 5:00 PM"
+                    />
+                  </div>
+                  <div>
+                    <Label>Location</Label>
+                    <Input
+                      value={editingItem.location || ""}
+                      onChange={(e) => updateField("location", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Status</Label>
+                    <Input
+                      value={editingItem.status || ""}
+                      onChange={(e) => updateField("status", e.target.value)}
+                      placeholder="upcoming, ongoing, or past"
+                    />
+                  </div>
+                  <div>
+                    <Label>Registration Link</Label>
+                    <Input
+                      value={editingItem.registration_link || ""}
+                      onChange={(e) => updateField("registration_link", e.target.value)}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Testimonials Form */}
+              {currentTable === "testimonials" && (
+                <>
+                  <div>
+                    <Label>Name</Label>
+                    <Input
+                      value={editingItem.name || ""}
+                      onChange={(e) => updateField("name", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Role</Label>
+                    <Input
+                      value={editingItem.role || ""}
+                      onChange={(e) => updateField("role", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Quote</Label>
+                    <Textarea
+                      value={editingItem.quote || ""}
+                      onChange={(e) => updateField("quote", e.target.value)}
+                      rows={4}
+                    />
+                  </div>
+                </>
+              )}
+
+              <div className="flex justify-end gap-2 pt-4">
+                <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={handleSaveEdit}>
+                  Save Changes
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <section className="section-padding bg-muted/50">
         <div className="container-custom">
           <div className="flex justify-between items-center mb-8">
@@ -285,7 +517,7 @@ export default function AdminDashboardNew() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() => window.open('https://supabase.com/dashboard/project/rbxrelsauoqytwifdteq/editor', '_blank')}
+                                onClick={() => handleEdit('partners', partner)}
                               >
                                 <Pencil className="w-4 h-4" />
                               </Button>
@@ -340,7 +572,7 @@ export default function AdminDashboardNew() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() => window.open('https://supabase.com/dashboard/project/rbxrelsauoqytwifdteq/editor', '_blank')}
+                                onClick={() => handleEdit('news', article)}
                               >
                                 <Pencil className="w-4 h-4" />
                               </Button>
@@ -397,7 +629,7 @@ export default function AdminDashboardNew() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() => window.open('https://supabase.com/dashboard/project/rbxrelsauoqytwifdteq/editor', '_blank')}
+                                onClick={() => handleEdit('events', event)}
                               >
                                 <Pencil className="w-4 h-4" />
                               </Button>
@@ -467,6 +699,13 @@ export default function AdminDashboardNew() {
                                   <Check className="w-4 h-4 mr-1" /> Approve
                                 </Button>
                               )}
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleEdit('testimonials', testimonial)}
+                              >
+                                <Pencil className="w-4 h-4" />
+                              </Button>
                               <Button
                                 size="sm"
                                 variant="destructive"
