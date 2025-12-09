@@ -23,7 +23,6 @@ export default function Partners() {
       .then((data) => setCoachingPartners(data))
       .catch((err) => console.error('Error loading coaching-partners.json:', err));
   }, []);
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -53,97 +52,97 @@ export default function Partners() {
                 <Card key={partner.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex items-center gap-4 p-6">
                     <img
-                          src={partner.logo}
-                          alt={partner.name + ' logo'}
-                          className="w-20 h-20 object-cover rounded-full border"
-                        />
-                        <div>
-                          <h3 className="font-bold text-lg mb-1">{partner.name}</h3>
-                          {partner.website && partner.website !== 'No website' && (
-                            <a href={partner.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
-                              Website <ExternalLink size={14} />
-                            </a>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-muted-foreground">No partners added yet. Please check back soon.</p>
-              )}
+                      src={partner.logo}
+                      alt={partner.name + ' logo'}
+                      className="w-20 h-20 object-cover rounded-full border"
+                    />
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{partner.name}</h3>
+                      {partner.website && partner.website !== 'No website' && (
+                        <a href={partner.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
+                          Website <ExternalLink size={14} />
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          </section>
+          ) : (
+            <p className="text-center text-muted-foreground">No partners added yet. Please check back soon.</p>
+          )}
+        </div>
+      </section>
 
-          {/* Sponsors Section */}
-          <section className="section-padding bg-background">
-            <div className="container-custom">
-              <SectionHeader
-                title="Our Sponsors"
-                subtitle="Organizations providing financial support for our programs"
-              />
-              {partners && partners.filter(p => p.type === 'Sponsor').length > 0 ? (
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  {partners.filter(p => p.type === 'Sponsor').map((sponsor) => (
-                    <Card key={sponsor.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
-                      <CardContent className="flex items-center gap-4 p-6">
-                        <img
-                          src={sponsor.logo}
-                          alt={sponsor.name + ' logo'}
-                          className="w-20 h-20 object-cover rounded-full border"
-                        />
-                        <div>
-                          <h3 className="font-bold text-lg mb-1">{sponsor.name}</h3>
-                          {sponsor.website && sponsor.website !== 'no sit' && (
-                            <a href={sponsor.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
-                              Website <ExternalLink size={14} />
-                            </a>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-muted-foreground">No sponsors added yet. Please check back soon.</p>
-              )}
+      {/* Sponsors Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <SectionHeader
+            title="Our Sponsors"
+            subtitle="Organizations providing financial support for our programs"
+          />
+          {partners && partners.filter(p => p.type === 'Sponsor').length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              {partners.filter(p => p.type === 'Sponsor').map((sponsor) => (
+                <Card key={sponsor.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
+                  <CardContent className="flex items-center gap-4 p-6">
+                    <img
+                      src={sponsor.logo}
+                      alt={sponsor.name + ' logo'}
+                      className="w-20 h-20 object-cover rounded-full border"
+                    />
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{sponsor.name}</h3>
+                      {sponsor.website && sponsor.website !== 'no sit' && (
+                        <a href={sponsor.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
+                          Website <ExternalLink size={14} />
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          </section>
+          ) : (
+            <p className="text-center text-muted-foreground">No sponsors added yet. Please check back soon.</p>
+          )}
+        </div>
+      </section>
 
-          {/* Coaching Partners Section */}
-          <section className="section-padding bg-background">
-            <div className="container-custom">
-              <SectionHeader
-                title="Coaching Partners"
-                subtitle="Community-based organizations we're supporting to drive transformation"
-              />
-              {coachingPartners && coachingPartners.length > 0 ? (
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  {coachingPartners.map((cp) => (
-                    <Card key={cp.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
-                      <CardContent className="flex items-center gap-4 p-6">
-                        <img
-                          src={cp.logo}
-                          alt={cp.name + ' logo'}
-                          className="w-20 h-20 object-cover rounded-full border"
-                        />
-                        <div>
-                          <h3 className="font-bold text-lg mb-1">{cp.name}</h3>
-                          {cp.website && (
-                            <a href={cp.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
-                              Website <ExternalLink size={14} />
-                            </a>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                  <p className="text-center text-muted-foreground">No coaching partners added yet. Please check back soon.</p>
-                )}
-              </div>
-            </section>
-          </Layout>
-        );
+      {/* Coaching Partners Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <SectionHeader
+            title="Coaching Partners"
+            subtitle="Community-based organizations we're supporting to drive transformation"
+          />
+          {coachingPartners && coachingPartners.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              {coachingPartners.map((cp) => (
+                <Card key={cp.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
+                  <CardContent className="flex items-center gap-4 p-6">
+                    <img
+                      src={cp.logo}
+                      alt={cp.name + ' logo'}
+                      className="w-20 h-20 object-cover rounded-full border"
+                    />
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{cp.name}</h3>
+                      {cp.website && (
+                        <a href={cp.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm flex items-center gap-1">
+                          Website <ExternalLink size={14} />
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground">No coaching partners added yet. Please check back soon.</p>
+          )}
+        </div>
+      </section>
+    </Layout>
+  );
 }
