@@ -84,39 +84,39 @@ export default function Index() {
   }, [partners.length]);
   return <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center bg-gradient-hero overflow-hidden py-8 sm:py-12 md:py-16">
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-secondary rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-40 h-40 sm:w-72 sm:h-72 bg-primary rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-56 h-56 sm:w-96 sm:h-96 bg-accent rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 w-32 h-32 sm:w-64 sm:h-64 bg-secondary rounded-full blur-3xl" />
         </div>
 
         <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="animate-fade-up">
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+              <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight text-left sm:text-left">
                 Building Resilient Communities,{" "}
                 <span className="gradient-text">Transforming Futures</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl">
+              <p className="text-base xs:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl text-left">
                 CArCRT is a community-rooted and nationally engaged non-profit organization
                 dedicated to building resilient, inclusive, and empowered communities across
                 Sierra Leone.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/programs">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 gap-2">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
+                <Link to="/programs" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 gap-2">
                     Explore Our Programs
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link to="/get-involved">
-                  <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Link to="/get-involved" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     Get Involved
                   </Button>
                 </Link>
-                <Link to="/donate">
-                  <Button size="lg" className="bg-accent hover:bg-accent/90 gap-2">
+                <Link to="/donate" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-accent hover:bg-accent/90 gap-2">
                     <Heart className="h-4 w-4" />
                     Donate Now
                   </Button>

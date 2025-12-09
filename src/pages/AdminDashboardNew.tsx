@@ -395,14 +395,14 @@ export default function AdminDashboardNew() {
       </Dialog>
 
       <section className="section-padding bg-muted/50">
-        <div className="container-custom">
+        <div className="container-custom px-2 sm:px-4 md:px-8 lg:px-12">
           <div className="flex justify-between items-center mb-8">
             <h1 className="font-heading text-3xl font-bold">Admin Dashboard</h1>
             <Button onClick={handleLogout} variant="outline">Logout</Button>
           </div>
 
           {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
             <Card>
               <CardContent className="pt-6">
                 <div className="text-2xl font-bold text-primary">{stats.partners}</div>
@@ -437,7 +437,7 @@ export default function AdminDashboardNew() {
 
           {/* Management Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="partners">Partners</TabsTrigger>
               <TabsTrigger value="news">News</TabsTrigger>
