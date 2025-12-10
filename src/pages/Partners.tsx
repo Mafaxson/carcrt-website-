@@ -16,24 +16,26 @@ export default function Partners() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch partners and sponsors from Supabase
+    // 1. Show local JSON immediately
+    fetch('/data/partners.json')
+      .then((res) => res.json())
+      .then((json) => {
+        setPartners(json.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
+      })
+      .catch((err) => {
+        console.error('Error loading partners.json:', err);
+        setPartners([]);
+      });
+
+    // 2. Fetch from Supabase in background and update if available
     const fetchPartners = async () => {
       const { data, error } = await supabase.from('partners').select('*');
-      if (error || !data || data.length === 0) {
-        // Fallback to local JSON if Supabase is empty or errors
-        fetch('/data/partners.json')
-          .then((res) => res.json())
-          .then((json) => {
-            setPartners(json.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
-          })
-          .catch((err) => {
-            console.error('Error loading partners.json:', err);
-            setPartners([]);
-          });
-      } else {
+      if (!error && data && data.length > 0) {
         setPartners(data.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
       }
     };
+    fetchPartners();
+
     // Fetch gallery from local JSON (can be migrated to Supabase if needed)
     fetch('/data/gallery.json')
       .then((res) => res.json())
@@ -46,7 +48,6 @@ export default function Partners() {
         if (data && data.length > 0) setRestoringAgri(data[0]);
       })
       .catch((err) => console.error('Error loading coaching-partners.json:', err));
-    fetchPartners();
   }, []);
   return (
     <Layout>
