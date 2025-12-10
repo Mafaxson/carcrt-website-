@@ -47,22 +47,15 @@ export default function News() {
   };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('news')
-          .select('*')
-          .order('date', { ascending: false });
-        if (data) {
-          setAllNews(data);
-          setFilteredNews(data);
-        }
-        if (error) console.error('Supabase error:', error);
-      } catch (error) {
-        console.error("Failed to fetch news:", error);
-      }
-    };
-    fetchNews();
+    fetch('/data/news.json')
+      .then((res) => res.json())
+      .then((data) => {
+        setAllNews(data);
+        setFilteredNews(data);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch news:', error);
+      });
   }, []);
 
   useEffect(() => {
