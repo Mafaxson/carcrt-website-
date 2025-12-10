@@ -61,14 +61,24 @@ export default function Index() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch partners from Supabase
-        const { data: partnersData } = await supabase
+        // Fetch partners and sponsors from Supabase
+        const { data: partnersData, error } = await supabase
           .from('partners')
           .select('*')
           .order('created_at', { ascending: true });
-        
-        if (partnersData) {
-          setPartners(partnersData);
+        if (error || !partnersData || partnersData.length === 0) {
+          // Fallback to local JSON if Supabase is empty or errors
+          fetch('/data/partners.json')
+            .then((res) => res.json())
+            .then((json) => {
+              setPartners(json.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
+            })
+            .catch((err) => {
+              console.error('Error loading partners.json:', err);
+              setPartners([]);
+            });
+        } else {
+          setPartners(partnersData.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
