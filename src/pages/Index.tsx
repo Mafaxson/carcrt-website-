@@ -289,14 +289,14 @@ export default function Index() {
                         <div key={partner.id} className="flex-shrink-0 w-48 h-24 bg-card rounded-xl flex items-center justify-center shadow-card border">
                           {partner.logo ? (
                             <img 
-                              src={partner.logo?.startsWith('http') ? partner.logo : getImageUrl(partner.logo)} 
+                              src={partner.logo.startsWith('http') ? partner.logo : getImageUrl(partner.logo)} 
                               alt={partner.name}
                               className="max-w-full max-h-full object-contain p-4"
                             />
                           ) : (
-                            <p className="font-medium text-foreground text-sm text-center px-4">
-                              {partner.name}
-                            </p>
+                            <div className="w-full h-full flex items-center justify-center bg-muted rounded-xl">
+                              <span className="text-xs text-muted-foreground text-center">No Logo</span>
+                            </div>
                           )}
                         </div>
                       ))
@@ -313,9 +313,9 @@ export default function Index() {
                                 className="max-w-full max-h-full object-contain p-4"
                               />
                             ) : (
-                              <p className="font-medium text-foreground text-sm text-center px-4">
-                                {partner?.name}
-                              </p>
+                              <div className="w-full h-full flex items-center justify-center bg-muted rounded-xl">
+                                <span className="text-xs text-muted-foreground text-center">No Logo</span>
+                              </div>
                             )}
                           </div>
                         );

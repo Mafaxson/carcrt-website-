@@ -101,11 +101,17 @@ export default function Partners() {
               {partners.filter(p => p.type === 'Partner').map((partner) => (
                 <Card key={partner.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex items-center gap-4 p-6">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name + ' logo'}
-                      className="w-20 h-20 object-cover rounded-full border"
-                    />
+                    {partner.logo ? (
+                      <img
+                        src={partner.logo.startsWith('http') ? partner.logo : getImageUrl(partner.logo)}
+                        alt={partner.name + ' logo'}
+                        className="w-20 h-20 object-cover rounded-full border"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 flex items-center justify-center bg-muted rounded-full border">
+                        <span className="text-xs text-muted-foreground text-center">No Logo</span>
+                      </div>
+                    )}
                     <div>
                       <h3 className="font-bold text-lg mb-1">{partner.name}</h3>
                       {partner.website && partner.website !== 'No website' && (
@@ -136,11 +142,17 @@ export default function Partners() {
               {partners.filter(p => p.type === 'Sponsor').map((sponsor) => (
                 <Card key={sponsor.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex items-center gap-4 p-6">
-                    <img
-                      src={sponsor.logo}
-                      alt={sponsor.name + ' logo'}
-                      className="w-20 h-20 object-cover rounded-full border"
-                    />
+                    {sponsor.logo ? (
+                      <img
+                        src={sponsor.logo.startsWith('http') ? sponsor.logo : getImageUrl(sponsor.logo)}
+                        alt={sponsor.name + ' logo'}
+                        className="w-20 h-20 object-cover rounded-full border"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 flex items-center justify-center bg-muted rounded-full border">
+                        <span className="text-xs text-muted-foreground text-center">No Logo</span>
+                      </div>
+                    )}
                     <div>
                       <h3 className="font-bold text-lg mb-1">{sponsor.name}</h3>
                       {sponsor.website && sponsor.website !== 'no sit' && (
