@@ -32,7 +32,7 @@ export default function Events() {
   });
 
   useEffect(() => {
-    // 1. Show local JSON events immediately
+    // Only show the four original events from local JSON
     fetch('/data/events.json')
       .then((res) => res.json())
       .then((json) => {
@@ -44,23 +44,6 @@ export default function Events() {
         setAllEvents([]);
         setFilteredEvents([]);
       });
-
-    // 2. Fetch from Supabase in background and update if available
-    const fetchEvents = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('events')
-          .select('*')
-          .order('date', { ascending: false });
-        if (!error && data && data.length > 0) {
-          setAllEvents(data);
-          setFilteredEvents(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch events:', error);
-      }
-    };
-    fetchEvents();
   }, []);
 
   useEffect(() => {
