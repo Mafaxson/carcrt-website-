@@ -19,11 +19,19 @@ export default function Partners() {
     // Fetch partners and sponsors from Supabase
     const fetchPartners = async () => {
       const { data, error } = await supabase.from('partners').select('*');
-      if (error) {
-        console.error('Error loading partners from Supabase:', error);
-        setPartners([]);
+      if (error || !data || data.length === 0) {
+        // Fallback to local JSON if Supabase is empty or errors
+        fetch('/data/partners.json')
+          .then((res) => res.json())
+          .then((json) => {
+            setPartners(json.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
+          })
+          .catch((err) => {
+            console.error('Error loading partners.json:', err);
+            setPartners([]);
+          });
       } else {
-        setPartners(data ? data.filter(p => p.type === 'Partner' || p.type === 'Sponsor') : []);
+        setPartners(data.filter(p => p.type === 'Partner' || p.type === 'Sponsor'));
       }
     };
     // Fetch gallery from local JSON (can be migrated to Supabase if needed)
