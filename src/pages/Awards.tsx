@@ -29,77 +29,32 @@ export default function Awards() {
 
   useEffect(() => {
     fetchAwards();
-    fetchCertificates();
-  }, []);
-
-  const fetchAwards = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('awards')
-        .select('*')
-        .order('date', { ascending: false });
-      if (data) setAwards(data);
-      if (error) console.error('Error fetching awards:', error);
-    } catch (error) {
-      console.error("Error fetching awards:", error);
-    }
-  };
-
-  const fetchCertificates = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('certificates')
-        .select('*')
-        .order('date', { ascending: false });
-      if (data) setCertificates(data);
-      if (error) console.error('Error fetching certificates:', error);
-    } catch (error) {
-      console.error("Error fetching certificates:", error);
-    }
-  };
-  return (
-    <Layout>
-      {lightboxImage && (
-        <ImageLightbox 
-          src={lightboxImage.src} 
-          alt={lightboxImage.alt} 
-          onClose={() => setLightboxImage(null)} 
-        />
-      )}
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-hero">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Awards & <span className="gradient-text">Recognition</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Celebrating our achievements and the recognition of our community impact
-            </p>
+    const noAwards = awards.length === 0 && certificates.length === 0;
+    return (
+      <Layout>
+        <section className="section-padding bg-background">
+          <div className="container-custom">
+            <SectionHeader
+              title="Awards & Recognition"
+              subtitle="Celebrating our achievements and the recognition of our community impact"
+            />
+            {noAwards ? (
+              <div className="text-center py-24">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4 mt-8">No Awards & Recognition</h2>
+                <p className="mb-8 text-muted-foreground">There are currently no awards, recognition, or certificates to display. Please check back soon.</p>
+              </div>
+            ) : (
+              <>
+                {/* ...existing code for displaying awards and certificates if present... */}
+              </>
+            )}
           </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <SectionHeader
-            title="Our Journey of Recognition"
-            subtitle="Milestones in our commitment to community transformation"
-          />
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-secondary" />
-
-              {/* Timeline Items */}
-              {awards.map((award, index) => (
-                <div
-                  key={award.id}
-                  className={`relative flex items-center mb-12 animate-fade-up ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+        </section>
+        {lightboxImage && (
+          <ImageLightbox src={lightboxImage.src} alt={lightboxImage.alt} onClose={() => setLightboxImage(null)} />
+        )}
+      </Layout>
+    );
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
                   {/* Content */}
