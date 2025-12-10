@@ -1,52 +1,60 @@
+
 import { useState } from "react";
 
 const sections = [
-  { key: "community", label: "Community Members Reached, Projects Implemented, Districts Engaged" },
-  { key: "gallery", label: "Our Work in Action (Gallery)" },
-  { key: "partners", label: "Partners & Sponsors, Affiliate Partner" },
-  { key: "leadership", label: "Leadership Team, Meet Our Team, Internship" },
-  { key: "stories", label: "Impact Stories (Approve/Edit/Delete)" },
-  { key: "news", label: "News & Updates (with categories)" },
-  { key: "events", label: "Events (All, Upcoming, Ongoing, Past)" },
+  { key: "community", label: "Community Stats" },
+  { key: "gallery", label: "Gallery" },
+  { key: "partners", label: "Partners & Sponsors" },
+  { key: "leadership", label: "Leadership Team" },
+  { key: "stories", label: "Impact Stories" },
+  { key: "news", label: "News & Updates" },
+  { key: "events", label: "Events" },
 ];
 
 export default function AdminDashboard() {
   const [active, setActive] = useState("community");
 
   return (
-    <div className="admin-dashboard">
-      <aside className="admin-sidebar">
-        <h2>Admin Dashboard</h2>
-        <nav>
-          <ul>
-            {sections.map(s => (
+    <div className="min-h-screen flex bg-gray-50">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r shadow-sm flex flex-col p-6">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-primary mb-2">Admin</h2>
+          <p className="text-xs text-gray-400">Dashboard</p>
+        </div>
+        <nav className="flex-1">
+          <ul className="space-y-2">
+            {sections.map((s) => (
               <li key={s.key}>
-                <button onClick={() => setActive(s.key)} className={active === s.key ? "active" : ""}>{s.label}</button>
+                <button
+                  onClick={() => setActive(s.key)}
+                  className={`w-full text-left px-4 py-2 rounded-lg transition font-medium ${active === s.key ? "bg-primary text-white shadow" : "hover:bg-primary/10 text-gray-700"}`}
+                >
+                  {s.label}
+                </button>
               </li>
             ))}
           </ul>
         </nav>
+        <div className="mt-8 text-center text-xs text-gray-300">&copy; {new Date().getFullYear()} CArCRT</div>
       </aside>
-      <main className="admin-main">
-        <div className="admin-section">
-          <h3>{sections.find(s => s.key === active)?.label}</h3>
-          {active === "community" ? (
-            <CommunityStatsAdmin />
-          ) : active === "gallery" ? (
-            <GalleryAdmin />
-          ) : active === "partners" ? (
-            <PartnersAdmin />
-          ) : active === "leadership" ? (
-            <LeadershipAdmin />
-          ) : active === "stories" ? (
-            <ImpactStoriesAdmin />
-          ) : active === "news" ? (
-            <NewsAdmin />
-          ) : active === "events" ? (
-            <EventsAdmin />
-          ) : (
-            <p>CRUD interface for {sections.find(s => s.key === active)?.label} will appear here.</p>
-          )}
+
+      {/* Main Content */}
+      <main className="flex-1 p-8 overflow-y-auto">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8 border-b pb-4 flex items-center gap-4">
+            <h1 className="text-3xl font-bold text-primary tracking-tight">{sections.find(s => s.key === active)?.label}</h1>
+            <span className="ml-auto text-xs text-gray-400">Admin Panel</span>
+          </div>
+          <div className="bg-white rounded-xl shadow p-6">
+            {active === "community" && <CommunityStatsAdmin />}
+            {active === "gallery" && <GalleryAdmin />}
+            {active === "partners" && <PartnersAdmin />}
+            {active === "leadership" && <LeadershipAdmin />}
+            {active === "stories" && <ImpactStoriesAdmin />}
+            {active === "news" && <NewsAdmin />}
+            {active === "events" && <EventsAdmin />}
+          </div>
         </div>
       </main>
     </div>
