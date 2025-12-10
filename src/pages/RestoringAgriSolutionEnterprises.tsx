@@ -32,20 +32,23 @@ export default function RestoringAgriSolutionEnterprises() {
               className="w-36 h-36 object-cover rounded-full border-4 border-blue-200 shadow-lg mb-4"
             />
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">
-              {restoringAgri.name}
+              ABOUT RESTORING AGRISOLUTION ENTERPRISE
             </h1>
             <Badge className="mb-2 bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1 rounded-full uppercase tracking-wide">Affiliate Partner</Badge>
             <div className="text-base text-muted-foreground mb-2 font-medium">
               Community-based organization we're supporting to drive transformation
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-6 mb-8 text-left">
+          <div className="bg-white rounded-xl shadow-md p-6 mb-8 text-center">
             <p className="mb-4 text-lg leading-relaxed text-gray-800">{restoringAgri.description}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700 justify-items-center">
               <div><span className="font-semibold">Focus:</span> {restoringAgri.focus}</div>
               <div><span className="font-semibold">Established:</span> {restoringAgri.established}</div>
               <div><span className="font-semibold">Location:</span> {restoringAgri.location}</div>
-              <div className="md:col-span-2"><span className="font-semibold">Mission:</span> {restoringAgri.mission}</div>
+            </div>
+            <div className="mt-6">
+              <div className="font-semibold text-lg mb-1 text-center">Mission:</div>
+              <div className="italic text-center text-gray-800">{restoringAgri.mission}</div>
             </div>
           </div>
           <SectionHeader
