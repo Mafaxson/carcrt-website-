@@ -32,21 +32,32 @@ export default function Events() {
   });
 
   useEffect(() => {
+    // 1. Show local JSON events immediately
+    fetch('/data/events.json')
+      .then((res) => res.json())
+      .then((json) => {
+        setAllEvents(json);
+        setFilteredEvents(json);
+      })
+      .catch((err) => {
+        console.error('Error loading events.json:', err);
+        setAllEvents([]);
+        setFilteredEvents([]);
+      });
+
+    // 2. Fetch from Supabase in background and update if available
     const fetchEvents = async () => {
       try {
         const { data, error } = await supabase
           .from('events')
           .select('*')
           .order('date', { ascending: false });
-        
-        if (error) {
-          console.error("Failed to fetch events:", error);
-        } else if (data) {
+        if (!error && data && data.length > 0) {
           setAllEvents(data);
           setFilteredEvents(data);
         }
       } catch (error) {
-        console.error("Failed to fetch events:", error);
+        console.error('Failed to fetch events:', error);
       }
     };
     fetchEvents();
