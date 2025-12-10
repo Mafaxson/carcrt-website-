@@ -27,13 +27,6 @@ export default function Awards() {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
-  useEffect(() => {
-    fetchAwards();
-    fetchCertificates();
-  }, []);
-
-  const noAwards = awards.length === 0 && certificates.length === 0;
-
   return (
     <Layout>
       <section className="section-padding bg-background">
@@ -48,9 +41,6 @@ export default function Awards() {
           </div>
         </div>
       </section>
-      {lightboxImage && (
-        <ImageLightbox src={lightboxImage.src} alt={lightboxImage.alt} onClose={() => setLightboxImage(null)} />
-      )}
     </Layout>
   );
                   style={{ animationDelay: `${index * 200}ms` }}
