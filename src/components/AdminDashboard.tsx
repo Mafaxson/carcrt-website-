@@ -1,6 +1,26 @@
 
 import { useState } from "react";
 
+function Header() {
+  return (
+    <header className="w-full bg-primary text-white shadow flex items-center px-8 h-16">
+      <div className="font-bold text-xl tracking-wide">CArCRT Admin</div>
+      <nav className="ml-auto flex gap-6 text-sm">
+        <a href="/" className="hover:underline">Home</a>
+        <a href="#" className="hover:underline">Contact</a>
+      </nav>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="w-full bg-gray-100 text-gray-500 text-xs py-4 text-center border-t mt-auto">
+      &copy; {new Date().getFullYear()} CArCRT. All rights reserved.
+    </footer>
+  );
+}
+
 const sections = [
   { key: "community", label: "Community Stats" },
   { key: "gallery", label: "Gallery" },
@@ -11,52 +31,56 @@ const sections = [
   { key: "events", label: "Events" },
 ];
 
+
 export default function AdminDashboard() {
   const [active, setActive] = useState("community");
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r shadow-sm flex flex-col p-6">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-primary mb-2">Admin</h2>
-          <p className="text-xs text-gray-400">Dashboard</p>
-        </div>
-        <nav className="flex-1">
-          <ul className="space-y-2">
-            {sections.map((s) => (
-              <li key={s.key}>
-                <button
-                  onClick={() => setActive(s.key)}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition font-medium ${active === s.key ? "bg-primary text-white shadow" : "hover:bg-primary/10 text-gray-700"}`}
-                >
-                  {s.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="mt-8 text-center text-xs text-gray-300">&copy; {new Date().getFullYear()} CArCRT</div>
-      </aside>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary/5 to-gray-100">
+      <Header />
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <aside className="w-64 bg-white border-r shadow-sm flex flex-col p-6">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-primary mb-2">Admin</h2>
+            <p className="text-xs text-gray-400">Dashboard</p>
+          </div>
+          <nav className="flex-1">
+            <ul className="space-y-2">
+              {sections.map((s) => (
+                <li key={s.key}>
+                  <button
+                    onClick={() => setActive(s.key)}
+                    className={`w-full text-left px-4 py-2 rounded-lg transition font-medium ${active === s.key ? "bg-primary text-white shadow" : "hover:bg-primary/10 text-gray-700"}`}
+                  >
+                    {s.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8 border-b pb-4 flex items-center gap-4">
-            <h1 className="text-3xl font-bold text-primary tracking-tight">{sections.find(s => s.key === active)?.label}</h1>
-            <span className="ml-auto text-xs text-gray-400">Admin Panel</span>
+        {/* Main Content */}
+        <main className="flex-1 p-8 overflow-y-auto flex flex-col">
+          <div className="max-w-5xl mx-auto w-full flex-1">
+            <div className="mb-8 border-b pb-4 flex items-center gap-4">
+              <h1 className="text-3xl font-bold text-primary tracking-tight">{sections.find(s => s.key === active)?.label}</h1>
+              <span className="ml-auto text-xs text-gray-400">Admin Panel</span>
+            </div>
+            <div className="bg-white rounded-xl shadow p-6 mb-8">
+              {active === "community" && <CommunityStatsAdmin />}
+              {active === "gallery" && <GalleryAdmin />}
+              {active === "partners" && <PartnersAdmin />}
+              {active === "leadership" && <LeadershipAdmin />}
+              {active === "stories" && <ImpactStoriesAdmin />}
+              {active === "news" && <NewsAdmin />}
+              {active === "events" && <EventsAdmin />}
+            </div>
           </div>
-          <div className="bg-white rounded-xl shadow p-6">
-            {active === "community" && <CommunityStatsAdmin />}
-            {active === "gallery" && <GalleryAdmin />}
-            {active === "partners" && <PartnersAdmin />}
-            {active === "leadership" && <LeadershipAdmin />}
-            {active === "stories" && <ImpactStoriesAdmin />}
-            {active === "news" && <NewsAdmin />}
-            {active === "events" && <EventsAdmin />}
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
+      <Footer />
     </div>
   );
 }
