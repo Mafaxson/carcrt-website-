@@ -79,41 +79,22 @@ export function ShareStoryForm({ onStorySubmit }: ShareStoryFormProps) {
     setLoading(true);
 
     try {
-      // For now, store story data without image upload to Supabase Storage
-      // TODO: Implement Supabase Storage upload for images
-      const { error } = await supabase
-        .from('submissions')
-        .insert([{
-          type: 'story',
-          data: {
-            name: formData.name,
-            email: formData.email,
-            story: formData.story,
-            category: formData.category,
-            imageUrl: image ? URL.createObjectURL(image) : null
-          },
-          status: 'pending'
-        }]);
+      // Send story data and image to backend API for email delivery
+      const formPayload = new FormData();
+      formPayload.append("name", formData.name);
+      formPayload.append("email", formData.email);
+      formPayload.append("story", formData.story);
+      formPayload.append("category", formData.category);
+      if (image) formPayload.append("image", image);
 
-      if (error) {
-        throw new Error("Failed to submit story");
-      }
+      const res = await fetch("/api/submit/story", {
+        method: "POST",
+        body: formPayload,
+      });
 
-      // Create submitted story object
-      const submittedStory: SubmittedStory = {
-        id: data.story.id,
-        name: formData.name,
-        email: formData.email,
-        story: formData.story,
-        category: formData.category,
-        imagePreview: preview,
-        timestamp: new Date(data.story.timestamp),
-      };
+      if (!res.ok) throw new Error("Failed to submit story");
 
-      // Call the callback to display the story immediately
-      onStorySubmit?.(submittedStory);
-
-      toast.success(data.message || "Story submitted successfully! Thank you for sharing your impact.");
+      toast.success("Story submitted successfully! Thank you for sharing your impact.");
 
       // Reset form
       setFormData({

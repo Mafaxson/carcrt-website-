@@ -1,3 +1,47 @@
+// --- Intern Groups (SQLite) ---
+const db = require('./internGroups.db.js');
+
+// Get all intern groups
+app.get('/api/intern-groups', (req, res) => {
+  db.all('SELECT * FROM intern_groups', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+// Add a new intern group
+app.post('/api/intern-groups', (req, res) => {
+  const { id, name, community, bio, photo } = req.body;
+  db.run(
+    'INSERT INTO intern_groups (id, name, community, bio, photo) VALUES (?, ?, ?, ?, ?)',
+    [id, name, community, bio, photo],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ id, name, community, bio, photo });
+    }
+  );
+});
+
+// Update an intern group
+app.put('/api/intern-groups/:id', (req, res) => {
+  const { name, community, bio, photo } = req.body;
+  db.run(
+    'UPDATE intern_groups SET name=?, community=?, bio=?, photo=? WHERE id=?',
+    [name, community, bio, photo, req.params.id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ id: req.params.id, name, community, bio, photo });
+    }
+  );
+});
+
+// Delete an intern group
+app.delete('/api/intern-groups/:id', (req, res) => {
+  db.run('DELETE FROM intern_groups WHERE id=?', [req.params.id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true });
+  });
+});
 import express from "express";
 import cors from "cors";
 import multer from "multer";

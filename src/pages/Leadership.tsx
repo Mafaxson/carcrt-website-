@@ -65,8 +65,9 @@ export default function Leadership() {
         console.error('Failed to fetch leadership data:', error);
       }
       try {
-        // Intern groups from representatives.json
-        const res = await fetch('/data/representatives.json');
+        // Intern groups from backend API
+        const res = await fetch('/api/intern-groups');
+        if (!res.ok) throw new Error('Failed to fetch intern groups');
         const data = await res.json();
         setInternGroups(data);
       } catch (error) {

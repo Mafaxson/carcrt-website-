@@ -51,17 +51,13 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     try {
-      const { error } = await supabase
-        .from('submissions')
-        .insert([{
-          type: 'contact',
-          data: formData,
-          status: 'pending'
-        }]);
-
-      if (!error) {
+      const res = await fetch("/api/submit/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
         toast({
           title: "Message Sent!",
           description: "Thank you for contacting us. We'll respond within 24-48 hours.",
