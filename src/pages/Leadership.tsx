@@ -173,44 +173,23 @@ export default function Leadership() {
         </div>
       </section>
 
-      {/* Internship Section */}
+
+      {/* Internship Section - Group Only */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <SectionHeader
             title="Internship"
-            subtitle="Fill out the volunteer application form to express your interest in volunteering or internship"
+            subtitle="CArCRT Social Work Interns, 2025 Cohort"
           />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {interns.map((intern, index) => (
-              <Card
-                key={intern.id}
-                className="card-hover border-none shadow-card animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6 text-center">
-                  {intern.photo ? (
-                    <img
-                      src={getImageUrl(intern.photo)}
-                      alt={intern.name}
-                      className="w-16 h-16 mx-auto mb-4 rounded-full object-cover object-center cursor-pointer hover:opacity-90 transition-opacity"
-                      onClick={() => setLightboxImage({ src: getImageUrl(intern.photo!), alt: intern.name })}
-                    />
-                  ) : (
-                    <div className="w-16 h-16 mx-auto mb-4 bg-secondary/10 rounded-full flex items-center justify-center">
-                      <User className="h-8 w-8 text-secondary" />
-                    </div>
-                  )}
-                  <h3 className="font-heading font-semibold text-foreground mb-1">
-                    {intern.name}
-                  </h3>
-                  <p className="text-secondary font-medium text-sm mb-2">{intern.community}</p>
-                  {intern.bio && (
-                    <p className="text-muted-foreground text-sm">{intern.bio}</p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+          <div className="flex flex-col items-center justify-center py-8">
+            <img
+              src="/uploads/1764862910949-WhatsApp Image 2025-12-04 at 15.28.22_96734277.jpg"
+              alt="CArCRT Social Work Interns, 2025 Cohort"
+              className="w-full max-w-xl rounded shadow mb-4"
+              style={{ objectFit: 'cover' }}
+            />
+            <p className="text-center text-lg font-semibold text-primary mt-2">Social Work Interns, 2025</p>
+            <p className="text-center text-sm text-muted-foreground mt-1 max-w-2xl">Social Work Interns from Eastern Technical University, 2025 cohort, gaining hands-on experience as CArCRT supports their professional growth through real community engagement.</p>
           </div>
         </div>
       </section>
