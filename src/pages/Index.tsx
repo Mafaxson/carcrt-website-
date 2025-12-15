@@ -53,9 +53,9 @@ export default function Index() {
   const [partners, setPartners] = useState<any[]>([]);
   const [featuredStories, setFeaturedStories] = useState<any[]>([]);
   const [stats, setStats] = useState({
-    membersReached: "5,000+",
+    membersReached: "15,000+",
     projectsImplemented: "15",
-    districtsEngaged: "1+"
+    districtsEngaged: "5"
   });
 
   useEffect(() => {
