@@ -19,7 +19,7 @@ const highlights = [
   {
     icon: Globe,
     title: "Nationally Engaged",
-    description: "Working across 15 districts throughout Sierra Leone",
+    description: "Working within 5 districts in Sierra Leone",
   },
   {
     icon: Handshake,
