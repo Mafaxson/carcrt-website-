@@ -109,9 +109,8 @@ export default function Index() {
                 <span className="gradient-text">Transforming Futures</span>
               </h1>
               <p className="text-base xs:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl text-left">
-                CArCRT is a community-rooted and nationally engaged non-profit organization
-                dedicated to building resilient, inclusive, and empowered communities across
-                Sierra Leone.
+                CArCRT is a community rooted and nationally engaged non-profit organization
+                dedicated to building resilient, inclusive, and empowered communities we work.
               </p>
               {/* Mobile-only CTA buttons */}
               <div className="flex flex-col gap-3 w-full max-w-xs justify-center items-center mx-auto sm:hidden">
