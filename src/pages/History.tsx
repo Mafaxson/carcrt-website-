@@ -31,10 +31,10 @@ export default function History() {
                   Our Beginning
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  CArCRT was founded to address the growing need for community resilience, inclusive
+                  CArCRT was founded to address the growing needs for community resilience, inclusive
                   leadership, and sustainable development across Sierra Leone. Recognizing the complex
                   challenges facing communities—from health crises to environmental changes, from social
-                  inequities to economic vulnerabilities—our founders came together with a shared vision
+                  inequities to economic vulnerabilities our founders came together with a shared vision
                   of empowering communities to lead their own transformation.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
@@ -55,7 +55,7 @@ export default function History() {
                   nature of community challenges and the need for holistic approaches.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Today, we operate in 15 districts across Sierra Leone, empowering thousands of
+                  Today, we operate within 5 districts in Sierra Leone, empowering thousands of
                   individuals and strengthening local systems through evidence-based programming,
                   advocacy, and community engagement.
                 </p>
@@ -66,12 +66,12 @@ export default function History() {
                   Our Impact
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Through our journey, we have implemented over 50 projects, reached more than 10,000
+                  Through our journey, we have implemented over 15 projects, reached more than 15,000
                   community members, and built lasting partnerships with organizations that share our
                   commitment to community transformation.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our approach has always centered on community ownership—ensuring that the initiatives
+                  Our approach has always centered on community ownership ensuring that the initiatives
                   we support are led by community members themselves, creating sustainable change that
                   continues long after our direct involvement ends.
                 </p>
