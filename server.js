@@ -196,7 +196,7 @@ function readStats() {
     const data = fs.readFileSync(statsDbPath, "utf-8");
     return JSON.parse(data);
   } catch (error) {
-    return { membersReached: "50,000+", projectsImplemented: "150+", districtsEngaged: "12" };
+    return { membersReached: "15,000+", projectsImplemented: "15+", districtsEngaged: "5" };
   }
 }
 
