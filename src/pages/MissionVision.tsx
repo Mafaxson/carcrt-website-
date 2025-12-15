@@ -78,7 +78,7 @@ export default function MissionVision() {
                 Through collaboration, advocacy, and action, we strengthen local capacity, nurture
                 inclusive leadership, and create pathways toward social, economic, and environmental
                 well-being. Our mission is to ensure that every community has the tools, support,
-                and opportunities to adapt, recover, and flourish—today and for generations to come.
+                and opportunities to adapt, recover, and flourish today and for generations to come.
               </p>
             </div>
           </div>
