@@ -1,0 +1,28 @@
+﻿
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"id":"2023","name":"2023 Cohort","community":"Community 
+                    A","bio":"First group of interns in 
+                    2023.","photo":""},{"id":"2024","name":"2024 
+                    Cohort","community":"Community B","bio":"Second group of 
+                    inte...
+RawContent        : HTTP/1.1 200 OK
+                    Access-Control-Allow-Origin: *
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Length: 1061
+                    Content-Type: application/json; charset=utf-8
+                    Date: Tue, 16 Dec 2025 21:21:52 GMT...
+Forms             : {}
+Headers           : {[Access-Control-Allow-Origin, *], [Connection, 
+                    keep-alive], [Keep-Alive, timeout=5], [Content-Length, 
+                    1061]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 1061
+
+
+
