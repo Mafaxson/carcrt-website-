@@ -3,25 +3,20 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
 
 export default function RestoringAgriSolutionEnterprises() {
   const [restoringAgri, setRestoringAgri] = useState(null);
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    // Fetch Restoring AgriSolution Enterprise info (still from static for now)
     fetch('/data/coaching-partners.json')
       .then((res) => res.json())
       .then((data) => {
         if (data && data.length > 0) setRestoringAgri(data[0]);
       });
-    // Fetch gallery images from Supabase
-    const fetchGallery = async () => {
-      const { data } = await supabase.from("gallery").select("*");
-      setGallery(data || []);
-    };
-    fetchGallery();
+    fetch('/data/gallery.json')
+      .then((res) => res.json())
+      .then((data) => setGallery(data));
   }, []);
 
   if (!restoringAgri) return null;
@@ -62,11 +57,11 @@ export default function RestoringAgriSolutionEnterprises() {
           />
           {gallery && gallery.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              {gallery.map((item: any) => (
+              {gallery.map((item) => (
                 <Card key={item.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex flex-col items-center p-4">
                     <img
-                      src={item.image_url || item.image}
+                      src={item.image}
                       alt={item.caption || 'Gallery image'}
                       className="w-full h-48 object-cover rounded mb-2"
                     />
