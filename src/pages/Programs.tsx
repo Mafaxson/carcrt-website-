@@ -6,6 +6,7 @@ import { ImageLightbox } from "@/components/ImageLightbox";
 
 import { supabase } from "@/lib/supabaseClient";
 
+
 interface Program {
   id: number;
   title: string;
@@ -14,7 +15,6 @@ interface Program {
   details?: string[];
   color?: string;
 }
-
 
 export default function Programs() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
@@ -58,9 +58,7 @@ export default function Programs() {
       <section className="section-padding bg-background">
         <div className="container-custom">
           {loading ? (
-            <div className="text-center py-12">Loading programs...</div>
-          ) : programs.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">No programs found.</div>
+            <div className="p-8 text-center">Loading programs...</div>
           ) : (
             <div className="space-y-12">
               {programs.map((program, index) => (
@@ -84,14 +82,13 @@ export default function Programs() {
                       </div>
                       <div className="md:col-span-1 p-8">
                         <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
-                        {/* Optionally render details if present */}
                         {program.details && program.details.length > 0 && (
                           <>
                             <h4 className="font-heading font-semibold text-foreground mb-4">Key Activities:</h4>
                             <ul className="grid sm:grid-cols-2 gap-3">
                               {program.details.map((detail, i) => (
                                 <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                  <span className="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                                  <span className={`w-2 h-2 rounded-full ${program.color || 'bg-primary'} mt-1.5 flex-shrink-0`} />
                                   <span>{detail}</span>
                                 </li>
                               ))}
