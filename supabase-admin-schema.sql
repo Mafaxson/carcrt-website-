@@ -95,3 +95,4 @@ create table if not exists events (
   location text,
   description text
 );
+
