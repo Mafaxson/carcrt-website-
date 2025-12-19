@@ -8,7 +8,7 @@
 -- ============================================
 CREATE TABLE IF NOT EXISTS partners (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
+-- ...existing code...
   logo TEXT,
   description TEXT,
   type TEXT NOT NULL DEFAULT 'partner',
@@ -16,60 +16,11 @@ CREATE TABLE IF NOT EXISTS partners (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+-- ...existing code...
+-- ...existing code...
 
--- ============================================
--- LEADERSHIP TABLE
--- ============================================
-CREATE TABLE IF NOT EXISTS leadership (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
-  title TEXT NOT NULL,
-  photo TEXT,
-  bio TEXT,
-  email TEXT,
-  phone TEXT,
-  category TEXT DEFAULT 'Leadership',
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
 
--- ============================================
--- NEWS TABLE
--- ============================================
-CREATE TABLE IF NOT EXISTS news (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  category TEXT,
-  excerpt TEXT,
-  content TEXT,
-  date DATE NOT NULL,
-  image TEXT,
-  author TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
-
--- ============================================
--- EVENTS TABLE
--- ============================================
--- ============================================
--- POPULATE PARTNERS DATA
--- ============================================
-
-INSERT INTO partners (id, name, logo, description, type, website, created_at) VALUES
-('550e8400-e29b-41d4-a716-446655440001', 'Sierra Leone Red Cross Society', '/uploads/partner-redcross.jpg', 'Leading humanitarian organization providing emergency response and community health services across Sierra Leone', 'partner', 'https://www.ifrc.org', NOW()),
-('550e8400-e29b-41d4-a716-446655440002', 'Cross of Christ Foundation', '/uploads/partner-crossofchrist.jpg', 'Faith-based organization supporting youth development and education programs', 'partner', NULL, NOW()),
-('550e8400-e29b-41d4-a716-446655440003', 'Widows Empowerment Organization', '/uploads/partner-widows.jpg', 'Dedicated to empowering widows through skills training and economic opportunities', 'partner', NULL, NOW()),
-('550e8400-e29b-41d4-a716-446655440004', 'Helping Hands Community', '/uploads/partner-helpinghands.jpg', 'Community-based organization focused on youth rehabilitation and support', 'partner', NULL, NOW()),
-('550e8400-e29b-41d4-a716-446655440005', 'Trading Organic Sierra Leone', '/uploads/partner-trading.jpg', 'Promoting sustainable agriculture and organic farming practices', 'sponsor', NULL, NOW()),
-('550e8400-e29b-41d4-a716-446655440006', 'AfrikSpark Technology Hub', '/uploads/partner-afrikspark.jpg', 'Technology and innovation hub supporting digital skills development', 'sponsor', 'https://www.afrikspark.com', NOW())
-ON CONFLICT (id) DO UPDATE SET
-  name = EXCLUDED.name,
-  logo = EXCLUDED.logo,
-  description = EXCLUDED.description,
-  type = EXCLUDED.type,
-  website = EXCLUDED.website;
-
+-- ...existing code...
 -- ============================================
 -- POPULATE LEADERSHIP DATA
 -- ============================================
@@ -152,9 +103,6 @@ Filming dates: December 18-20, 2025. No experience needed - just your authentic 
 
 Topics this month: Managing Triggers During Holidays, Building Healthy Relationships, and Planning for 2026. Light refreshments served. All discussions confidential.', '2025-12-20', 'CArCRT Community Center, Wellington', '3:00 PM - 5:00 PM', 'Support Group', '/uploads/event-support.jpg', 'ongoing', NULL, NULL, NOW());
 
--- ============================================
--- POPULATE GALLERY
--- ============================================
 
 INSERT INTO gallery (id, title, description, image, category, partner_slug, created_at) VALUES
 ('950e8400-e29b-41d4-a716-446655440001', 'Pepper Farming Project', 'Community members working in pepper farming initiative', '/uploads/gallery-pepper.jpg', 'Agriculture', 'trading-organic', NOW()),
@@ -165,7 +113,12 @@ INSERT INTO gallery (id, title, description, image, category, partner_slug, crea
 ('950e8400-e29b-41d4-a716-446655440006', 'Community Meeting', 'Community gathering for project planning', '/uploads/gallery-meeting.jpg', 'Community', 'widows-empowerment', NOW()),
 ('950e8400-e29b-41d4-a716-446655440007', 'School Support Program', 'Students receiving educational support', '/uploads/gallery-school.jpg', 'Education', 'cross-of-christ', NOW()),
 ('950e8400-e29b-41d4-a716-446655440008', 'Health Outreach', 'Community health awareness campaign', '/uploads/gallery-health.jpg', 'Health', 'redcross', NOW());
-
+ON CONFLICT (id) DO UPDATE SET
+  title = EXCLUDED.title,
+  description = EXCLUDED.description,
+  image = EXCLUDED.image,
+  category = EXCLUDED.category,
+  partner_slug = EXCLUDED.partner_slug;
 -- ============================================
 -- POPULATE STATS
 -- ============================================
@@ -299,26 +252,20 @@ CREATE TABLE IF NOT EXISTS testimonials (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- ============================================
--- STATS TABLE
--- ============================================
-CREATE TABLE IF NOT EXISTS stats (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  key TEXT UNIQUE NOT NULL,
-  value TEXT NOT NULL,
-  label TEXT,
-  icon TEXT,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
-
--- ============================================
--- FEATURED STORIES TABLE
--- ============================================
-CREATE TABLE IF NOT EXISTS featured_stories (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  excerpt TEXT,
-  image TEXT,
+-- ...existing code...
+INSERT INTO partners (id, name, logo, description, type, website, created_at) VALUES
+('550e8400-e29b-41d4-a716-446655440001', 'Sierra Leone Red Cross Society', '/uploads/partner-redcross.jpg', 'Leading humanitarian organization providing emergency response and community health services across Sierra Leone', 'partner', 'https://www.ifrc.org', NOW()),
+('550e8400-e29b-41d4-a716-446655440002', 'Cross of Christ Foundation', '/uploads/partner-crossofchrist.jpg', 'Faith-based organization supporting youth development and education programs', 'partner', NULL, NOW()),
+('550e8400-e29b-41d4-a716-446655440003', 'Widows Empowerment Organization', '/uploads/partner-widows.jpg', 'Dedicated to empowering widows through skills training and economic opportunities', 'partner', NULL, NOW()),
+('550e8400-e29b-41d4-a716-446655440004', 'Helping Hands Community', '/uploads/partner-helpinghands.jpg', 'Community-based organization focused on youth rehabilitation and support', 'partner', NULL, NOW()),
+('550e8400-e29b-41d4-a716-446655440005', 'Trading Organic Sierra Leone', '/uploads/partner-trading.jpg', 'Promoting sustainable agriculture and organic farming practices', 'sponsor', NULL, NOW()),
+('550e8400-e29b-41d4-a716-446655440006', 'AfrikSpark Technology Hub', '/uploads/partner-afrikspark.jpg', 'Technology and innovation hub supporting digital skills development', 'sponsor', 'https://www.afrikspark.com', NOW())
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  logo = EXCLUDED.logo,
+  description = EXCLUDED.description,
+  type = EXCLUDED.type,
+  website = EXCLUDED.website;
   category TEXT,
   link TEXT,
   order_index INTEGER DEFAULT 0,
