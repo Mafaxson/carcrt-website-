@@ -71,10 +71,11 @@ const NewsDetail = () => {
       try {
         const res = await fetch('/data/news.json');
         const data = await res.json();
-        const found = data.find((item: NewsArticle) => item.id === id);
+        const found = data.find((item: NewsArticle) => String(item.id) === String(id));
         if (found) {
           setArticle(found);
         } else {
+          console.warn('NewsDetail: Article not found for id', id);
           navigate("/news");
         }
       } catch (error) {
@@ -123,7 +124,7 @@ const NewsDetail = () => {
 
         {/* Article Header */}
         <div className="max-w-4xl mx-auto">
-          <Badge className="mb-4">{article.category}</Badge>
+          <Badge className="mb-4">{Array.isArray(article.category) ? article.category.join(', ') : article.category}</Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{article.title}</h1>
           
           <div className="flex items-center gap-4 text-muted-foreground mb-8">
