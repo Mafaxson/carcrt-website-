@@ -231,13 +231,16 @@ export default function News() {
                   >
                     <CardContent className="p-6">
                       {post.image && (
-                        <div className="mb-4 -mx-6 -mt-6 h-48 overflow-hidden rounded-t-lg cursor-pointer" onClick={() => setLightboxImage({ src: getImageUrl(post.image), alt: post.title })}>
-                          <img 
-                            src={getImageUrl(post.image)} 
-                            alt={post.title}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform"
-                          />
-                        </div>
+                        <>
+                          <div className="mb-4 -mx-6 -mt-6 h-48 overflow-hidden rounded-t-lg relative">
+                            <img 
+                              src={getImageUrl(post.image)} 
+                              alt={post.title}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
+                              onClick={() => setLightboxImage({ src: getImageUrl(post.image), alt: post.title })}
+                            />
+                          </div>
+                        </>
                       )}
                       {post.videoUrl && !post.image && getVideoThumbnail(post.videoUrl) && (
                         <div className="mb-4 -mx-6 -mt-6 h-48 overflow-hidden rounded-t-lg cursor-pointer relative group" onClick={() => window.open(post.videoUrl, '_blank')}>
@@ -276,8 +279,8 @@ export default function News() {
                       </h3>
                       <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
                       <div className="flex flex-wrap gap-3 items-center">
-                        <Link to={`/news/${post.id}`}>
-                          <Button variant="link" className="p-0 h-auto gap-1 text-primary">
+                        <Link to={`/news/${post.id}`} style={{ textDecoration: 'none' }}>
+                          <Button variant="link" className="p-0 h-auto gap-1 text-primary" tabIndex={0}>
                             Read More
                             <ArrowRight className="h-4 w-4" />
                           </Button>
