@@ -6,6 +6,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+export function Layout({ children }: LayoutProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
