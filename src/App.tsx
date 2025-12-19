@@ -37,6 +37,8 @@ const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const Accessibility = React.lazy(() => import("./pages/Accessibility"));
 const RestoringAgriSolutionEnterprises = React.lazy(() => import("./pages/RestoringAgriSolutionEnterprises"));
+const AdminLogin = React.lazy(() => import("./pages/AdminLogin"));
+const AdminDashboardNew = React.lazy(() => import("./pages/AdminDashboardNew"));
 
 const queryClient = new QueryClient();
 
@@ -71,7 +73,8 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-use" element={<TermsOfUse />} />
             <Route path="/accessibility" element={<Accessibility />} />
-            {/* Admin routes removed */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin-new" element={<AdminDashboardNew />} />
             <Route path="/partners/restoring-agrisolution-enterprises" element={<RestoringAgriSolutionEnterprises />} />
           </Routes>
         </Suspense>
