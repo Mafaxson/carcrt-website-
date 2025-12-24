@@ -7,6 +7,7 @@ import { Heart, Users, Target, Sprout, GraduationCap, Droplets, Leaf, Scale, Shi
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import teamPhoto from "@/assets/team-photo.jpg";
+import christmasFlyer from "@/assets/christmas-message-flyer.jpg";
 import { supabase } from "@/lib/supabaseClient";
 import { getImageUrl } from "@/lib/imageUtils";
 
@@ -57,6 +58,19 @@ export default function Index() {
     projectsImplemented: "15",
     districtsEngaged: "5"
   });
+
+  // Swiper for hero images
+  const heroImages = [
+    { src: christmasFlyer, alt: "Christmas Message Flyer" },
+    { src: teamPhoto, alt: "CArCRT Team Group Photo" }
+  ];
+  const [heroIndex, setHeroIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,8 +168,23 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="hidden lg:flex justify-center animate-fade-up delay-200">
-              <img src={teamPhoto} alt="CArCRT Team" className="w-full h-auto max-w-2xl object-contain animate-float" />
+            <div className="hidden lg:flex justify-center items-center animate-fade-up delay-200 relative min-h-[350px]">
+              <img
+                src={heroImages[heroIndex].src}
+                alt={heroImages[heroIndex].alt}
+                className="w-full h-auto max-w-2xl object-contain animate-float rounded-xl shadow-lg transition-all duration-700"
+                style={{ minHeight: 350, maxHeight: 400 }}
+              />
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {heroImages.map((img, idx) => (
+                  <button
+                    key={img.alt}
+                    className={`w-3 h-3 rounded-full border border-white ${heroIndex === idx ? 'bg-primary' : 'bg-white/60'}`}
+                    onClick={() => setHeroIndex(idx)}
+                    aria-label={`Show ${img.alt}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

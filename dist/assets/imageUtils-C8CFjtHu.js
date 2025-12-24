@@ -1,0 +1,1 @@
+import{S as r}from"./supabase-DIfPkhuc.js";function e(t){return t?t.startsWith("http://")||t.startsWith("https://")||t.startsWith("/uploads")?t:`${r}/storage/v1/object/public/uploads/${t}`:""}export{e as g};

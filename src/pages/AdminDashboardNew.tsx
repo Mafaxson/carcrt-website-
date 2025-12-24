@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Pencil, Trash2, Plus, Check, X, Eye } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 export default function AdminDashboardNew() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   // Auth protection: redirect if not logged in
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -24,11 +24,6 @@ export default function AdminDashboardNew() {
       }
     });
   }, [navigate]);
-import { Pencil, Trash2, Plus, Check, X, Eye } from "lucide-react";
-
-export default function AdminDashboardNew() {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   // Stats
   const [stats, setStats] = useState({
