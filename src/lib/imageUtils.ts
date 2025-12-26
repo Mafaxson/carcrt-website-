@@ -6,8 +6,8 @@ export function getImageUrl(path: string): string {
   if (path.startsWith('http://') || path.startsWith('https://')) {
     return path;
   }
-  // If path starts with /uploads, use local public folder
-  if (path.startsWith('/uploads')) {
+  // If path starts with /uploads or /lovable-uploads, use local public folder
+  if (path.startsWith('/uploads') || path.startsWith('/lovable-uploads')) {
     return path;
   }
   // Otherwise, use Supabase public URL
