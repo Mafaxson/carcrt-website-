@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import leadershipData from '@/../data/leadership.json';
 import { Card } from './ui/card';
 
 interface Leader {
@@ -8,14 +7,33 @@ interface Leader {
   role: string;
   bio: string;
   photo: string;
+  category?: string;
 }
 
 const LeadershipList: React.FC = () => {
   const [leaders, setLeaders] = useState<Leader[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLeaders(leadershipData as Leader[]);
+    fetch('/data/leadership.json')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load leadership data');
+        return res.json();
+      })
+      .then((json) => {
+        setLeaders(json.filter((l: Leader) => l.category === 'Leadership'));
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) return <div className="text-center py-8 text-muted-foreground">Loading leadership team...</div>;
+  if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
+  if (!leaders.length) return <div className="text-center py-8 text-muted-foreground">No leadership team data found.</div>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
