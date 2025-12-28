@@ -1,9 +1,11 @@
+
 import { Layout } from "@/components/layout/Layout";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Target, Globe, Handshake } from "lucide-react";
+import LeadershipList from "@/components/LeadershipList";
 
 const highlights = [
   {
@@ -100,6 +102,18 @@ export default function About() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <SectionHeader
+            title="Our Leadership"
+            subtitle="Meet the team guiding CArCRT's mission"
+            centered={true}
+          />
+          <LeadershipList />
         </div>
       </section>
 
