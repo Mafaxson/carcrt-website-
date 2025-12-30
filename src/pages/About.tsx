@@ -58,6 +58,24 @@ export default function About() {
         </div>
       </section>
 
+      {/* Coordinators Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Meet Our Team</h2>
+          <p className="text-lg text-muted-foreground mb-8 text-center">Dedicated coordinators working across regions to drive community transformation</p>
+          <CoordinatorsList />
+        </div>
+      </section>
+
+      {/* Intern Groups Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Internship</h2>
+          <p className="text-lg text-muted-foreground mb-8 text-center">CArCRT Internship Cohorts by Year</p>
+          <InternGroupsList />
+        </div>
+      </section>
+
       {/* What We Do Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
@@ -67,71 +85,71 @@ export default function About() {
           />
 
           <div className="max-w-4xl mx-auto">
-                      <div className="space-y-6">
-                        <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up">
-                          <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
-                            Strategic Community Interventions
-                          </h3>
-                          <p className="text-muted-foreground">
-                            We design and implement programs that address the root causes of community
-                            challenges, from drug abuse prevention to climate change adaptation. Our
-                            interventions are evidence-based and tailored to local contexts.
-                          </p>
-                        </div>
+            <div className="space-y-6">
+              <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up">
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  Strategic Community Interventions
+                </h3>
+                <p className="text-muted-foreground">
+                  We design and implement programs that address the root causes of community
+                  challenges, from drug abuse prevention to climate change adaptation. Our
+                  interventions are evidence-based and tailored to local contexts.
+                </p>
+              </div>
 
-                        <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up delay-100">
-                          <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
-                            Capacity Building & Empowerment
-                          </h3>
-                          <p className="text-muted-foreground">
-                            We invest in developing local leadership, providing training and resources
-                            that enable community members to lead their own development initiatives and
-                            create sustainable change.
-                          </p>
-                        </div>
+              <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up delay-100">
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  Capacity Building & Empowerment
+                </h3>
+                <p className="text-muted-foreground">
+                  We invest in developing local leadership, providing training and resources
+                  that enable community members to lead their own development initiatives and
+                  create sustainable change.
+                </p>
+              </div>
 
-                        <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up delay-200">
-                          <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
-                            Advocacy & Policy Engagement
-                          </h3>
-                          <p className="text-muted-foreground">
-                            We amplify community voices in policy discussions, advocating for inclusive
-                            policies that support resilient and equitable development across Sierra Leone.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+              <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up delay-200">
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  Advocacy & Policy Engagement
+                </h3>
+                <p className="text-muted-foreground">
+                  We amplify community voices in policy discussions, advocating for inclusive
+                  policies that support resilient and equitable development across Sierra Leone.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                {/* CTA Section */}
-                <section className="section-padding bg-primary text-primary-foreground">
-                  <div className="container-custom text-center">
-                    <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                      Want to Learn More?
-                    </h2>
-                    <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                      Discover our leadership team, explore our programs, or get in touch to learn how
-                      you can be part of our mission.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                      <Link to="/leadership">
-                        <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-                          Meet Our Team
-                        </Button>
-                      </Link>
-                      <Link to="/contact">
-                        <Button
-                          size="lg"
-                          variant="outline"
-                          className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-                        >
-                          Contact Us
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </section>
+      {/* CTA Section */}
+      <section className="section-padding bg-primary text-primary-foreground">
+        <div className="container-custom text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+            Want to Learn More?
+          </h2>
+          <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
+            Discover our leadership team, explore our programs, or get in touch to learn how
+            you can be part of our mission.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/leadership">
+              <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                Meet Our Team
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              >
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }
