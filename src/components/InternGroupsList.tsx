@@ -40,7 +40,7 @@ const InternGroupsList: React.FC = () => {
       {internGroups.map((group) => (
         <Card key={group.id} className="flex flex-col items-center p-4 shadow-lg">
           <img
-            src={group.photo}
+            src={group.photo && group.photo.trim() !== "" ? group.photo : "/uploads/placeholder-intern-group.jpg"}
             alt={group.name}
             className="w-32 h-32 object-cover rounded-full mb-4 border-2 border-primary"
             loading="lazy"

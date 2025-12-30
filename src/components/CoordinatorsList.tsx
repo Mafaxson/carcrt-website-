@@ -40,7 +40,7 @@ const CoordinatorsList: React.FC = () => {
       {coordinators.map((coordinator) => (
         <Card key={coordinator.id} className="flex flex-col items-center p-4 shadow-lg">
           <img
-            src={coordinator.photo}
+            src={coordinator.photo && coordinator.photo.trim() !== "" ? coordinator.photo : "/uploads/placeholder-coordinator.jpg"}
             alt={coordinator.name}
             className="w-32 h-32 object-cover rounded-full mb-4 border-2 border-primary"
             loading="lazy"
