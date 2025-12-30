@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Target, Globe, Handshake } from "lucide-react";
 import LeadershipList from "@/components/LeadershipList";
+import CoordinatorsList from "@/components/CoordinatorsList";
+import InternGroupsList from "@/components/InternGroupsList";
 
 const highlights = [
   {
@@ -105,15 +107,40 @@ export default function About() {
         </div>
       </section>
 
+
       {/* Leadership Section */}
       <section className="section-padding bg-background">
         <div className="container-custom">
           <SectionHeader
             title="Our Leadership"
-            subtitle="Meet the team guiding CArCRT's mission"
+            subtitle="Meet the dedicated team driving community transformation across Sierra Leone"
             centered={true}
           />
           <LeadershipList />
+        </div>
+      </section>
+
+      {/* Coordinators Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <SectionHeader
+            title="Meet Our Team"
+            subtitle="Dedicated coordinators working across regions to drive community transformation"
+            centered={true}
+          />
+          <CoordinatorsList />
+        </div>
+      </section>
+
+      {/* Internship Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <SectionHeader
+            title="Internship"
+            subtitle="CArCRT Internship Cohorts by Year"
+            centered={true}
+          />
+          <InternGroupsList />
         </div>
       </section>
 
