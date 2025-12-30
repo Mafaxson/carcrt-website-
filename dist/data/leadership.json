@@ -4,7 +4,7 @@
     "name": "Saffa Andrew Koroma",
     "role": "Chief Executive Officer",
     "bio": "Leading CArCRT's strategic vision and organizational growth across Sierra Leone.",
-    "photo": "/uploads/placeholder-leader1.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -12,7 +12,7 @@
     "name": "Nancy Admire Mustapha",
     "role": "Director of Strategy and Learning",
     "bio": "Guides strategy and learning at CArCRT to improve impact through research, planning and innovation.",
-    "photo": "/uploads/placeholder-leader2.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Mannah Kamara",
     "role": "Operation Manager",
     "bio": "Oversees CArCRT’s daily operations, ensuring smooth programs and strong community impact.",
-    "photo": "/uploads/placeholder-leader3.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -28,15 +28,15 @@
     "name": "Tamba Max Koromba",
     "role": "Compliance Manager",
     "bio": "Ensures compliance and accountability at CArCRT through regulatory oversight and ethical standards.",
-    "photo": "/uploads/placeholder-leader4.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
     "id": "leader-5",
     "name": "Matenneh Swaray",
-    "role": "Head of Women, Youth Empowerment and Food Security",
+    "role": "Head of Women,Youth Empowerment and Food Security.",
     "bio": "Leads CArCRT’s initiatives on women’s empowerment, youth development, and food security, driving programs that strengthen livelihoods and improve community resilience.",
-    "photo": "/uploads/placeholder-leader5.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -44,7 +44,7 @@
     "name": "Jefery K Morison",
     "role": "Head of Social Services and Public Health",
     "bio": "Oversees CArCRT’s social services and public health programs, advancing community well-being through outreach, support systems, and health-focused initiatives.",
-    "photo": "/uploads/placeholder-leader6.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -52,7 +52,7 @@
     "name": "Mariama S Kallon",
     "role": "Sponsorship Coordinator",
     "bio": "Coordinates sponsorships to provide support and resources to communities we serve.",
-    "photo": "/uploads/placeholder-leader7.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Rebecca Kargbo",
     "role": "Women and Youth Empowerment Coordinator",
     "bio": "Leads programs empowering women and youth for growth, skills, and community impact.",
-    "photo": "/uploads/placeholder-leader8.jpg",
+    "photo": "",
     "category": "Leadership"
   },
   {
@@ -68,111 +68,7 @@
     "name": "Hassan SHERIFF",
     "role": "Head of Media and Communications",
     "bio": "Leads media and communications to promote our mission and engage the community.",
-    "photo": "/uploads/placeholder-leader9.jpg",
+    "photo": "",
     "category": "Leadership"
-  },
-  {
-    "id": "coordinator-1",
-    "name": "Sidikie Mansaray",
-    "role": "Logistics Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator1.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-2",
-    "name": "Aminata K Alpha",
-    "role": "Receptionist",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator2.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-3",
-    "name": "Bockarie Emmanuel Ansumana",
-    "role": "Admin Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator3.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-4",
-    "name": "Genda Michael Siaka",
-    "role": "Communications and Education Coordinator",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator4.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-5",
-    "name": "Joseph Saffa Bockarie",
-    "role": "Education Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator5.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-6",
-    "name": "Prince Alpha Karnagboi",
-    "role": "Child Protection and Safeguarding Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator6.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-7",
-    "name": "Mary Sia Boima",
-    "role": "Social Services and Public Health Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator7.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-8",
-    "name": "Hassan A Conteh",
-    "role": "Social Services and Public Health Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator8.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-9",
-    "name": "Lahai Aruna Jagbagee Bonnie.",
-    "role": "Social Services and Public Health Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator9.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-10",
-    "name": "Yayah N Senesie",
-    "role": "Resources Center Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator10.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-11",
-    "name": "James Mustapha Tailu",
-    "role": "Education Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator11.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "coordinator-12",
-    "name": "Hawanatu Konneh",
-    "role": "Procurement Officer",
-    "bio": "",
-    "photo": "/uploads/placeholder-coordinator12.jpg",
-    "category": "Coordinator"
-  },
-  {
-    "id": "intern-group-2025",
-    "name": "Internship Cohort 2025",
-    "community": "2025 Cohort",
-    "bio": "Meet our 2025 internship cohort, a group of passionate and dedicated interns making a difference this year.",
-    "photo": "/uploads/placeholder-interns-2025.jpg",
-    "category": "Intern Group"
   }
 ]
