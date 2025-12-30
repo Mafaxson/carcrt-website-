@@ -70,5 +70,29 @@
     "bio": "Leads media and communications to promote our mission and engage the community.",
     "photo": "/uploads/leader9.jpg",
     "category": "Leadership"
+  },
+  {
+    "id": "coordinator-1",
+    "name": "Sidikie Mansaray",
+    "role": "Logistics Officer",
+    "bio": "Coordinates logistics and ensures smooth operations.",
+    "photo": "/uploads/coordinator1.jpg",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-2",
+    "name": "Aminata K Alpha",
+    "role": "Receptionist",
+    "bio": "Welcomes visitors and manages front desk operations.",
+    "photo": "/uploads/coordinator2.jpg",
+    "category": "Coordinator"
+  },
+  {
+    "id": "intern-group-2025",
+    "name": "Internship Cohort 2025",
+    "community": "2025 Cohort",
+    "bio": "Meet our 2025 internship cohort, a group of passionate and dedicated interns making a difference this year.",
+    "photo": "/uploads/interns-2025.jpg",
+    "category": "Intern Group"
   }
 ]
