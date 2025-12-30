@@ -16,19 +16,13 @@ const LeadershipList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/leadership.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load leadership data');
-        return res.json();
-      })
-      .then((json) => {
-        setLeaders(json.filter((l: Leader) => l.category === 'Leadership'));
+    fetch("/data/leadership.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setLeaders(data.filter((item: Leader) => item.category === "Leadership"));
         setLoading(false);
       })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading leadership team...</div>;
