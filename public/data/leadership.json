@@ -88,6 +88,38 @@
     "category": "Coordinator"
   },
   {
+    "id": "coordinator-3",
+    "name": "Hassan Sheriff",
+    "role": "Field Coordinator",
+    "bio": "Manages field operations and supports community outreach.",
+    "photo": "/uploads/1764866796558-WhatsApp Image 2025-12-04 at 14.23.33_a42a4810.jpg",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-4",
+    "name": "Rebecca Kargbo",
+    "role": "Youth Programs Coordinator",
+    "bio": "Leads youth engagement and empowerment initiatives.",
+    "photo": "/uploads/1764867043680-WhatsApp Image 2025-12-04 at 14.28.47_1d345bef.jpg",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-5",
+    "name": "Mariama S Kallon",
+    "role": "Sponsorship Coordinator",
+    "bio": "Coordinates sponsorships and donor relations.",
+    "photo": "/uploads/1764867257664-WhatsApp Image 2025-12-04 at 14.32.37_e9cd5d82.jpg",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-6",
+    "name": "Matenneh Swaray",
+    "role": "Women & Food Security Coordinator",
+    "bio": "Leads programs for women’s empowerment and food security.",
+    "photo": "/uploads/1764867785700-WhatsApp Image 2025-12-04 at 14.34.52_c7041376.jpg",
+    "category": "Coordinator"
+  },
+  {
     "id": "intern-group-2025",
     "name": "Internship Cohort 2025",
     "community": "2025 Cohort",
