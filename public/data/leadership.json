@@ -1,5 +1,5 @@
 [
-  {"id": "coordinator-3", "name": "Bockarie Emmanuel Ansumana", "role": "Admin officer", "bio": "Handles administrative tasks and supports office operations.", "photo": "", "category": "Coordinator"},
+  {"id": "coordinator-3", "name": "Bockarie Emmanuel Ansumana", "role": "Admin officer", "bio": "Handles administrative tasks and supports office operations.", "photo": "/uploads/bockarie-emmanuel-ansumana.jpg", "category": "Coordinator"},
   {"id": "coordinator-4", "name": "Genda Michael Siaka", "role": "Communications and Education Coordinator", "bio": "Coordinates communications and educational outreach.", "photo": "", "category": "Coordinator"},
   {"id": "coordinator-5", "name": "Joseph Saffa Bockarie", "role": "Education officer", "bio": "Supports education programs and initiatives.", "photo": "", "category": "Coordinator"},
   {"id": "coordinator-6", "name": "Prince Alpha Karnagboi", "role": "Child Protection and safeguarding officer", "bio": "Ensures child protection and safeguarding standards.", "photo": "", "category": "Coordinator"},
