@@ -2,7 +2,6 @@
     "id": "coordinator-3",
     "name": "Bockarie Emmanuel Ansumana",
     "role": "Admin officer",
-    "bio": "Handles administrative tasks and supports office operations.",
     "photo": "",
     "category": "Coordinator"
   },
@@ -102,6 +101,7 @@
     "bio": "Oversees CArCRT’s daily operations, ensuring smooth programs and strong community impact.",
     "photo": "/uploads/1764862044261-unnamed.jpg",
     "category": "Leadership"
+  [
   },
   {
     "id": "leader-4",
