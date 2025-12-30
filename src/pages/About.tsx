@@ -44,40 +44,29 @@ export default function About() {
             </h1>
             <p className="text-lg text-muted-foreground">
               Coalition for Community Resilience and Transformation
-            return (
-              <Layout>
-                {/* Hero Section */}
-                <section className="relative py-20 bg-gradient-hero">
-                  <div className="container-custom">
-                    <div className="max-w-3xl mx-auto text-center animate-fade-up">
-                      <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-                        About <span className="gradient-text">CArCRT</span>
-                      </h1>
-                      <p className="text-lg text-muted-foreground">
-                        Coalition for Community Resilience and Transformation
-                      </p>
-                    </div>
-                  </div>
-                </section>
+            </p>
+          </div>
+        </div>
+      </section>
 
-                {/* Leadership Section */}
-                <section className="section-padding bg-background">
-                  <div className="container-custom">
-                    <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Our Leadership</h2>
-                    <p className="text-lg text-muted-foreground mb-8 text-center">Meet the dedicated team driving community transformation across Sierra Leone</p>
-                    <LeadershipList />
-                  </div>
-                </section>
+      {/* Leadership Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Our Leadership</h2>
+          <p className="text-lg text-muted-foreground mb-8 text-center">Meet the dedicated team driving community transformation across Sierra Leone</p>
+          <LeadershipList />
+        </div>
+      </section>
 
-                {/* What We Do Section */}
-                <section className="section-padding bg-muted">
-                  <div className="container-custom">
-                    <SectionHeader
-                      title="What We Do"
-                      subtitle="Our comprehensive approach to community development"
-                    />
+      {/* What We Do Section */}
+      <section className="section-padding bg-muted">
+        <div className="container-custom">
+          <SectionHeader
+            title="What We Do"
+            subtitle="Our comprehensive approach to community development"
+          />
 
-                    <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto">
                       <div className="space-y-6">
                         <div className="bg-background rounded-2xl p-8 shadow-card animate-fade-up">
                           <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
