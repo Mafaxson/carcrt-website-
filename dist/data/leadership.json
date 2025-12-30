@@ -1,3 +1,83 @@
+  {
+    "id": "coordinator-3",
+    "name": "Bockarie Emmanuel Ansumana",
+    "role": "Admin officer",
+    "bio": "Handles administrative tasks and supports office operations.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-4",
+    "name": "Genda Michael Siaka",
+    "role": "Communications and Education Coordinator",
+    "bio": "Coordinates communications and educational outreach.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-5",
+    "name": "Joseph Saffa Bockarie",
+    "role": "Education officer",
+    "bio": "Supports education programs and initiatives.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-6",
+    "name": "Prince Alpha Karnagboi",
+    "role": "Child Protection and safeguarding officer",
+    "bio": "Ensures child protection and safeguarding standards.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-7",
+    "name": "Mary Sia Boima",
+    "role": "Social Services and Public Health Officer",
+    "bio": "Delivers social services and public health support.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-8",
+    "name": "Hassan A Conteh",
+    "role": "Social Services and Public Health officer",
+    "bio": "Provides public health and social services.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-9",
+    "name": "Lahai Aruna Jagbagee Bonnie.",
+    "role": "Social Services and Public Health officer",
+    "bio": "Supports public health and social service programs.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-10",
+    "name": "Yayah N Senesie",
+    "role": "Resources Center officer",
+    "bio": "Manages the resources center and supports community access.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-11",
+    "name": "James Mustapha Tailu",
+    "role": "Education Officer",
+    "bio": "Coordinates education programs and outreach.",
+    "photo": "",
+    "category": "Coordinator"
+  },
+  {
+    "id": "coordinator-12",
+    "name": "Hawanatu Konneh",
+    "role": "Procurement Officer",
+    "bio": "Manages procurement and supply chain operations.",
+    "photo": "",
+    "category": "Coordinator"
+  },
 [
   {
     "id": "leader-1",
