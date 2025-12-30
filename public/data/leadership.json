@@ -4,7 +4,7 @@
     "name": "Saffa Andrew Koroma",
     "role": "Chief Executive Officer",
     "bio": "Leading CArCRT's strategic vision and organizational growth across Sierra Leone.",
-    "photo": "",
+    "photo": "/uploads/leader1.jpg",
     "category": "Leadership"
   },
   {
@@ -12,7 +12,7 @@
     "name": "Nancy Admire Mustapha",
     "role": "Director of Strategy and Learning",
     "bio": "Guides strategy and learning at CArCRT to improve impact through research, planning and innovation.",
-    "photo": "",
+    "photo": "/uploads/leader2.jpg",
     "category": "Leadership"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Mannah Kamara",
     "role": "Operation Manager",
     "bio": "Oversees CArCRT’s daily operations, ensuring smooth programs and strong community impact.",
-    "photo": "",
+    "photo": "/uploads/leader3.jpg",
     "category": "Leadership"
   },
   {
@@ -28,7 +28,7 @@
     "name": "Tamba Max Koromba",
     "role": "Compliance Manager",
     "bio": "Ensures compliance and accountability at CArCRT through regulatory oversight and ethical standards.",
-    "photo": "",
+    "photo": "/uploads/leader4.jpg",
     "category": "Leadership"
   },
   {
@@ -36,7 +36,7 @@
     "name": "Matenneh Swaray",
     "role": "Head of Women,Youth Empowerment and Food Security.",
     "bio": "Leads CArCRT’s initiatives on women’s empowerment, youth development, and food security, driving programs that strengthen livelihoods and improve community resilience.",
-    "photo": "",
+    "photo": "/uploads/leader5.jpg",
     "category": "Leadership"
   },
   {
@@ -44,7 +44,7 @@
     "name": "Jefery K Morison",
     "role": "Head of Social Services and Public Health",
     "bio": "Oversees CArCRT’s social services and public health programs, advancing community well-being through outreach, support systems, and health-focused initiatives.",
-    "photo": "",
+    "photo": "/uploads/leader6.jpg",
     "category": "Leadership"
   },
   {
@@ -52,7 +52,7 @@
     "name": "Mariama S Kallon",
     "role": "Sponsorship Coordinator",
     "bio": "Coordinates sponsorships to provide support and resources to communities we serve.",
-    "photo": "",
+    "photo": "/uploads/leader7.jpg",
     "category": "Leadership"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Rebecca Kargbo",
     "role": "Women and Youth Empowerment Coordinator",
     "bio": "Leads programs empowering women and youth for growth, skills, and community impact.",
-    "photo": "",
+    "photo": "/uploads/leader8.jpg",
     "category": "Leadership"
   },
   {
@@ -68,7 +68,7 @@
     "name": "Hassan SHERIFF",
     "role": "Head of Media and Communications",
     "bio": "Leads media and communications to promote our mission and engage the community.",
-    "photo": "",
+    "photo": "/uploads/leader9.jpg",
     "category": "Leadership"
   }
 ]

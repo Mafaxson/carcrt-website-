@@ -34,7 +34,7 @@ const LeadershipList: React.FC = () => {
       {leaders.map((leader) => (
         <Card key={leader.id} className="flex flex-col items-center p-4 shadow-lg">
           <img
-            src={leader.photo}
+            src={leader.photo && leader.photo.trim() !== "" ? leader.photo : "/uploads/placeholder-leader.jpg"}
             alt={leader.name}
             className="w-32 h-32 object-cover rounded-full mb-4 border-2 border-primary"
             loading="lazy"
