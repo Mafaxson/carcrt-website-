@@ -108,41 +108,7 @@ export default function About() {
       </section>
 
 
-      {/* Leadership Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <SectionHeader
-            title="Our Leadership"
-            subtitle="Meet the dedicated team driving community transformation across Sierra Leone"
-            centered={true}
-          />
-          <LeadershipList />
-        </div>
-      </section>
 
-      {/* Coordinators Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <SectionHeader
-            title="Meet Our Team"
-            subtitle="Dedicated coordinators working across regions to drive community transformation"
-            centered={true}
-          />
-          <CoordinatorsList />
-        </div>
-      </section>
-
-      {/* Internship Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <SectionHeader
-            title="Internship"
-            subtitle="CArCRT Internship Cohorts by Year"
-            centered={true}
-          />
-          <InternGroupsList />
-        </div>
-      </section>
 
       {/* What We Do Section */}
       <section className="section-padding bg-muted">
