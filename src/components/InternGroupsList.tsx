@@ -33,7 +33,7 @@ const InternGroupsList: React.FC = () => {
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading intern groups...</div>;
   if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
-  if (!internGroups.length) return <div className="text-center py-8 text-muted-foreground">No intern groups found.</div>;
+  if (!internGroups.length) return null;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
