@@ -1,2 +1,33 @@
-[...full contents of data/news.json...]
-[...full contents of data/news.json...]
+[
+  {
+    "id": "news-1765200000000",
+    "title": "Christmas Message to the Team from CEO Saffa Andrew Koroma",
+    "category": [
+      "Announcements",
+      "Updates"
+    ],
+    "excerpt": "A heartfelt Christmas and New Year message from CEO Saffa Andrew Koroma to the CArCRT team, celebrating dedication, unity, and hope.",
+    "content": "Dear Team,\nAs we celebrate this joyful season, I want to take a moment to express my heartfelt gratitude to each of you. Your dedication, resilience, and teamwork throughout the year have been the driving force behind our successes and the impact we continue to make in our communities.\nChristmas reminds us of the power of hope, unity, and generosity. These values are at the core of our mission, and I am proud to see them reflected in the way you serve, support, and inspire others every day.\nMay this festive season bring peace, joy, and renewal to you and your families. As we step into the new year, let us carry forward the spirit of collaboration and excellence, knowing that together we can achieve even greater milestones.\nThank you for your commitment and for being an integral part of this journey.\nWishing you all a Merry Christmas and a prosperous New Year filled with blessings and opportunities.\n\nSAFFA ANDREW KOROMA\nChief Executive Officer.",
+    "date": "2025-12-24",
+    "image": "/lovable-uploads/Christmas message flyers .jpeg",
+    "link": "",
+    "videoUrl": ""
+  },
+  {
+    "id": "news-1764961272463",
+    "title": "CArCRT Formally Known as CADaCT-SL engages in mass campaign against drug abuse in Kenema",
+    "category": [
+      "Announcements",
+      "Impact",
+      "Partnerships",
+      "Programs"
+    ],
+    "excerpt": " Coalition Against Drugs Abuse and Community Transformation (CArCRT-SL). The Cross of Christ Association (CCA), in collaboration with the Widow Empowerment Organization and Partners, on Saturday 15th November 2025, took part in a day-long mass sensitization rally against all forms of drug abuse.",
+    "content": "Thousands of residents from various organisations and institutions joined the rally by assembling at the Sierra Leone Police barracks field along Hangha Road, using a public address system and other instruments mounted on a canopy, singing, dancing and preaching messages of drug abuse as they proceeded through Hangha Road, Dama Road, Kingsway Street, Combema Road, Sumaila Street, Koroma Street and Hangha Road to the police barracks, where various stakeholders addressed the gathering in connection to drug abuse.\r\n\r\nThe Chief Executive Officer of CADaCT-SL, Saffa Andrew Koroma, while addressing his audience, thanks all and sundry for taking part in the rally, adding the musical performance, drama, poetry, comedy, spiritual counselling, statements and pledges by dignitaries are moves in the right direction in eradicating drug abuse from our society.\r\nSaffa Andrew Koroma, CADaCT-SL CEO, gave thanks to all partners for their diverse support; among them are Trading Organic, Sierra Leone Red Cross, Sierra Leone Police, Republic of Sierra Leone Armed Forces, Eastern Technical University Sierra Leone, 42 secondary schools, Inter Religious Council and other community stakeholders, DHMT, Mr Jimmy Batilo Songa, Radish Bar and Restaurant, Ministry of Gender and Children Affairs, Resident Minister East, Human Rights Commission, Scrap Metals Association, Africel Sierra Leone, Orange Sierra Leone, Mayor of Kenema City Council, Paramount Chiefs, AIG East, BRU, Drivers Union, KDFA and the media outlets (print, electronic and bloggers).\r\n\r\nHe pointed out that the objective of the entire rally is to raise public awareness on the dangers of drug abuse through culturally resonant messaging.\r\n\r\nMobilise corporate, non governmental, and civil society actors to co-invest in prevention and rehabilitation.\r\n\r\nEquip youth and community leaders with knowledge and tools to resist peer pressure and substance misuse. Strengthen referral pathways for treatment, psychosocial support, and reintegration.\r\n\r\n\r\n\r\n",
+    "date": "2025-11-15",
+    "image": "/uploads/1764961272394-CEO-CADaCT_SL-Saffa-Andrew-Koroma-addressing-his-audience.png",
+    "link": "https://independentobserver-sl.com/2025/11/18/cadact-sl-engages-in-mass-campaign-against-drug-abuse-in-kenema%ef%bf%bc/",
+    "videoUrl": ""
+  }
+  // ... (add all other news items from your data/news.json here)
+]
