@@ -168,11 +168,9 @@ function Leadership() {
             )}
           </div>
           {/* Interns (Representatives) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8">
-            {interns.length === 0 ? (
-              <div className="text-center text-muted-foreground col-span-2">.</div>
-            ) : (
-              interns.map((intern) => (
+          {interns.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8">
+              {interns.map((intern) => (
                 <div key={intern.id} className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
                   {intern.photo && (
                     <img
@@ -185,9 +183,9 @@ function Leadership() {
                   <p className="text-sm font-medium text-gray-600 mb-2 text-center">{intern.community}</p>
                   <p className="text-gray-700 text-center">{intern.bio}</p>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
