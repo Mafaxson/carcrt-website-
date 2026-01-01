@@ -170,7 +170,7 @@ function Leadership() {
           {/* Interns (Representatives) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8">
             {interns.length === 0 ? (
-              <div className="text-center text-muted-foreground col-span-2">No interns found.</div>
+              <div className="text-center text-muted-foreground col-span-2">.</div>
             ) : (
               interns.map((intern) => (
                 <div key={intern.id} className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
