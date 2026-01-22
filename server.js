@@ -28,22 +28,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // Email sending helper
-// Send to both main and alias addresses
-const MAIN_EMAILS = ["carcrt@carcrt.org", "info@carcrt.org"];
+// Send ALL outgoing emails ONLY to info@carcrt.org
+const MAIN_EMAIL = "info@carcrt.org";
 
-async function sendEmail(to, subject, html) {
+async function sendEmail(_to, subject, html) {
   try {
-    // Force all outgoing emails to always include both main and alias addresses
-    let recipients = [];
-    if (Array.isArray(to)) {
-      recipients = [...to, ...MAIN_EMAILS];
-    } else if (typeof to === 'string') {
-      recipients = [to, ...MAIN_EMAILS];
-    } else {
-      recipients = [...MAIN_EMAILS];
-    }
-    // Remove duplicates and falsy values
-    recipients = Array.from(new Set(recipients.filter(Boolean)));
+    // Ignore any provided 'to' and always send to info@carcrt.org only
+    const recipients = [MAIN_EMAIL];
     const info = await transporter.sendMail({
       from: '"CArCRT Website" <CArCRT@carcrt.org>',
       to: recipients,
@@ -54,7 +45,7 @@ async function sendEmail(to, subject, html) {
     console.log(`   Message ID: ${info.messageId}`);
     return info;
   } catch (error) {
-    console.error(`❌ Email error sending to ${to}:`, error.message);
+    console.error(`❌ Email error sending to info@carcrt.org:`, error.message);
     console.error("   Full error:", error);
     throw error;
   }
