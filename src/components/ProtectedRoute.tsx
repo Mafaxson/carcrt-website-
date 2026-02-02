@@ -37,7 +37,8 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!authenticated) {
-    return <Navigate to="/admin/login" replace />;
+    // Admin login removed; redirect to home or show unauthorized
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
