@@ -23,13 +23,20 @@ export default function AdminDashboardNew() {
         navigate("/admin-login");
         return;
       }
-      // Fetch user role from 'users' table
+      // Try to fetch user role from 'users' table first
+      let role = null;
       const { data: userData, error } = await supabase
         .from('users')
         .select('role')
         .eq('id', session.user.id)
         .single();
-      if (error || !userData || !['admin', 'super_admin'].includes(userData.role)) {
+      if (!error && userData && userData.role) {
+        role = userData.role;
+      } else {
+        // Fallback: check Supabase Auth user metadata
+        role = session.user.user_metadata?.role || session.user.app_metadata?.role || null;
+      }
+      if (!role || !['admin', 'super_admin'].includes(role)) {
         toast({
           title: "Access Denied",
           description: "You do not have admin privileges.",
