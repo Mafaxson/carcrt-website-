@@ -75,6 +75,7 @@ const App = () => (
             <Route path="/accessibility" element={<Accessibility />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin-new" element={<AdminDashboardNew />} />
+            <Route path="/admin" element={<AdminDashboardNew />} />
             <Route path="/partners/restoring-agrisolution-enterprises" element={<RestoringAgriSolutionEnterprises />} />
           </Routes>
         </Suspense>
