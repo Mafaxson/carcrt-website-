@@ -18,8 +18,24 @@ export default function AdminDashboardNew() {
   const navigate = useNavigate();
   // Auth protection: redirect if not logged in
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) {
+        navigate("/admin-login");
+        return;
+      }
+      // Fetch user role from 'users' table
+      const { data: userData, error } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+      if (error || !userData || !['admin', 'super_admin'].includes(userData.role)) {
+        toast({
+          title: "Access Denied",
+          description: "You do not have admin privileges.",
+          variant: "destructive",
+        });
+        await supabase.auth.signOut();
         navigate("/admin-login");
       }
     });
