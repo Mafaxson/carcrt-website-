@@ -8,19 +8,7 @@ import { ImageLightbox } from "@/components/ImageLightbox";
 import { supabase } from "@/lib/supabaseClient";
 import { getImageUrl } from "@/lib/imageUtils";
 
-interface Event {
-  id: string;
-  title: string;
-  date?: string;
-  time?: string;
-  location: string;
-  description: string;
-  status: string;
-  image?: string;
-  registration_link?: string;
-  application_pdf?: string;
-  category?: string;
-}
+
 
 const EventDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,23 +20,14 @@ const EventDetail = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await fetch('/data/events.json');
-        const events = await res.json();
-        const found = events.find((e: any) => e.id === id);
-        if (found) {
-          setEvent({
-            ...found,
-            date: found.dateFrom || found.date || "",
-            time: found.time || "",
-            status: found.status || "upcoming",
-            application_pdf: found.applicationPdf || found.application_pdf || "",
-            registration_link: found.registrationLink || found.registration_link || "",
-          });
-        } else {
+        const { data, error } = await supabase.from('events').select('*').eq('id', id).single();
+        if (error || !data) {
           navigate("/events");
+        } else {
+          setEvent(data);
         }
       } catch (error) {
-        console.error("Error loading event from events.json:", error);
+        console.error("Error loading event from Supabase:", error);
         navigate("/events");
       } finally {
         setLoading(false);
@@ -97,13 +76,11 @@ const EventDetail = () => {
           <div className="max-w-4xl mx-auto">
             <Badge className="mb-4">{event.status === "upcoming" ? "Upcoming" : event.status === "ongoing" ? "Ongoing" : "Past Event"}</Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{event.title}</h1>
-            
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground mb-8">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
                 <span className="text-lg">
-                  {event.date && new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                  {event.time && ` at ${event.time}`}
+                  {event.event_date && new Date(event.event_date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </span>
               </div>
               {event.location && (
@@ -115,10 +92,10 @@ const EventDetail = () => {
             </div>
 
             {/* Event Image */}
-            {event.image && (
-              <div className="mb-8 rounded-lg overflow-hidden shadow-lg cursor-pointer" onClick={() => setLightboxImage({ src: getImageUrl(event.image), alt: event.title })}>
+            {event.image_url && (
+              <div className="mb-8 rounded-lg overflow-hidden shadow-lg cursor-pointer" onClick={() => setLightboxImage({ src: getImageUrl(event.image_url), alt: event.title })}>
                 <img 
-                  src={getImageUrl(event.image)}
+                  src={getImageUrl(event.image_url)}
                   alt={event.title}
                   className="w-full h-auto object-cover max-h-[500px] hover:opacity-90 transition-opacity"
                 />
@@ -135,7 +112,7 @@ const EventDetail = () => {
             {/* Registration Section */}
             {event.status === "upcoming" && (
               <div className="bg-primary/10 rounded-lg p-6 mb-8">
-                {event.application_pdf ? (
+                {event.applicationPdf ? (
                   <>
                     <h3 className="font-semibold text-xl mb-4 text-center">Application Process</h3>
                     <div className="space-y-4">
@@ -145,7 +122,7 @@ const EventDetail = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                           <a
-                            href={getImageUrl(event.application_pdf)}
+                            href={getImageUrl(event.applicationPdf)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex"
@@ -159,11 +136,11 @@ const EventDetail = () => {
                       </div>
                     </div>
                   </>
-                ) : event.registration_link ? (
+                ) : event.registrationLink ? (
                   <div className="text-center">
                     <h3 className="font-semibold text-xl mb-4">Ready to Join Us?</h3>
                     <a
-                      href={event.registration_link}
+                      href={event.registrationLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

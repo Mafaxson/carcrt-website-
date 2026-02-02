@@ -4,21 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, FileText, ExternalLink } from "lucide-react";
 import { ImageLightbox } from "@/components/ImageLightbox";
-// import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 import { getImageUrl } from "@/lib/imageUtils";
 
-interface NewsArticle {
-  id: string;
-  title: string;
-  category: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  image?: string;
-  videoUrl?: string;
-  link?: string;
-  document?: string;
-}
+
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -69,14 +58,12 @@ const NewsDetail = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const res = await fetch('/data/news.json');
-        const data = await res.json();
-        const found = data.find((item: NewsArticle) => String(item.id) === String(id));
-        if (found) {
-          setArticle(found);
-        } else {
+        const { data, error } = await supabase.from('news').select('*').eq('id', id).single();
+        if (error || !data) {
           console.warn('NewsDetail: Article not found for id', id);
           navigate("/news");
+        } else {
+          setArticle(data);
         }
       } catch (error) {
         console.error("Error fetching article:", error);
@@ -126,11 +113,10 @@ const NewsDetail = () => {
         <div className="max-w-4xl mx-auto">
           <Badge className="mb-4">{Array.isArray(article.category) ? article.category.join(', ') : article.category}</Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{article.title}</h1>
-          
           <div className="flex items-center gap-4 text-muted-foreground mb-8">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <span>{new Date(article.date).toLocaleDateString()}</span>
+              <span>{article.published_at ? new Date(article.published_at).toLocaleDateString() : ''}</span>
             </div>
           </div>
 
@@ -180,10 +166,10 @@ const NewsDetail = () => {
             </div>
           )}
 
-          {article.image && !article.videoUrl && (
-            <div className="mb-8 rounded-lg overflow-hidden shadow-lg cursor-pointer" onClick={() => setLightboxImage({ src: getImageUrl(article.image), alt: article.title })}>
+          {article.image_url && !article.videoUrl && (
+            <div className="mb-8 rounded-lg overflow-hidden shadow-lg cursor-pointer" onClick={() => setLightboxImage({ src: getImageUrl(article.image_url), alt: article.title })}>
               <img 
-                src={getImageUrl(article.image)}
+                src={getImageUrl(article.image_url)}
                 alt={article.title}
                 className="w-full h-auto object-cover hover:opacity-90 transition-opacity"
               />
@@ -192,9 +178,9 @@ const NewsDetail = () => {
 
           {/* Content */}
           <div className="prose prose-lg max-w-none mb-8">
-            <p className="text-xl text-muted-foreground mb-6">{article.excerpt}</p>
+            {article.excerpt && <p className="text-xl text-muted-foreground mb-6">{article.excerpt}</p>}
             <div className="whitespace-pre-wrap text-foreground leading-relaxed">
-              {article.content}
+              {article.body}
             </div>
           </div>
 

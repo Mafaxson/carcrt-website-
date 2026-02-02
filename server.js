@@ -100,9 +100,6 @@ const storiesDbPath = path.join(dataDir, "stories.json");
 const statsDbPath = path.join(dataDir, "stats.json");
 const partnersDbPath = path.join(dataDir, "partners.json");
 // All admin endpoints and logic removed
-    return [];
-  }
-}
 
 function writeNews(news) {
   fs.writeFileSync(newsDbPath, JSON.stringify(news, null, 2));

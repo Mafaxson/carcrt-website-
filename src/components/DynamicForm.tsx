@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { sendEmail } from '@/lib/sendEmail';
 
 // Field definition for modular forms
 export type Field = {
@@ -45,6 +46,19 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formType, fields, onSuccess }
         },
       ]);
       if (error) throw error;
+
+      // Send email notification to info@carcrt.org
+      try {
+        await sendEmail({
+          to: 'info@carcrt.org',
+          subject: `New ${formType} submission`,
+          html: `<h2>New ${formType} Submission</h2><pre>${JSON.stringify(formData, null, 2)}</pre><p>Submitted at: ${new Date().toLocaleString()}</p>`
+        });
+      } catch (emailErr) {
+        // Optionally log or display email error, but do not block form success
+        console.error('Email notification failed:', emailErr);
+      }
+
       setStatus('success');
       setMessage('Thank you! Your submission was received.');
       setFormData({});
