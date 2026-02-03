@@ -1,4 +1,3 @@
-
 [
   {
     "id": "leader-ceo-001",
@@ -39,7 +38,7 @@
     "id": "leader-1764863305356",
     "name": "Jefery K Morison",
     "role": " Head of Social Services and Public Health",
-    "bio": "Oversees CArCRT’s social services and public health programs, advancing community well-being through outreach, support systems, and health-focused initiatives.”",
+    "bio": "Oversees CArCRT’s social services and public health programs, advancing community well-being through outreach, support systems, and health-focused initiatives.",
     "photo": "/uploads/1764957681077-WhatsApp Image 2025-12-05 at 17.56.56_ace1bfd3.jpg"
   },
   {
@@ -62,21 +61,18 @@
     "role": " Head of Media and Communications",
     "bio": "Leads media and communications to promote our mission and engage the community.",
     "photo": "/uploads/1764868499760-WhatsApp Image 2025-12-04 at 15.58.35_14a33985.jpg"
-  }
-]
-
-  {"id": "coordinator-1", "name": "Sidikie Mansaray", "role": "Logistics Officer", "bio": "Coordinates logistics and ensures smooth operations.", "photo": "/uploads/Sidikie Mansaray Logistics Officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-2", "name": "Aminata K Alpha", "role": "Receptionist", "bio": "Welcomes visitors and manages front desk operations.", "photo": "/uploads/Aminata K Alpha Receptionist.jpg", "category": "Coordinator"},
-  {"id": "coordinator-3", "name": "Bockarie Emmanuel Ansumana", "role": "Admin officer", "bio": "Handles administrative tasks and supports office operations.", "photo": "/uploads/Bockarie Emmanuel Ansumana Admin officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-4", "name": "Genda Michael Siaka", "role": "Communications and Education Coordinator", "bio": "Coordinates communications and educational outreach.", "photo": "/uploads/Genda Michael Siaka Communications and Education Coordinator.jpg", "category": "Coordinator"},
-  {"id": "coordinator-5", "name": "Joseph Saffa Bockarie", "role": "Education officer", "bio": "Supports education programs and initiatives.", "photo": "/uploads/Joseph Saffa Bockarie Education officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-6", "name": "Prince Alpha Karnagboi", "role": "Child Protection and safeguarding officer", "bio": "Ensures child protection and safeguarding standards.", "photo": "/uploads/Prince Alpha Karnagboi Child Protection and safeguarding officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-7", "name": "Mary Sia Boima", "role": "Social Services and Public Health Officer", "bio": "Delivers social services and public health support.", "photo": "/uploads/Mary Sia Boima Social Services and Public Health Officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-8", "name": "Hassan A Conteh", "role": "Social Services and Public Health officer", "bio": "Provides public health and social services.", "photo": "/uploads/Hassan A ContehSocial Services and Public Health officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-9", "name": "Lahai Aruna Jagbagee Bonnie.", "role": "Social Services and Public Health officer", "bio": "Supports public health and social service programs.", "photo": "/uploads/Lahai Aruna Jagbagee Bonnie. Social Services and Public Health officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-10", "name": "Yayah N Senesie", "role": "Resources Center officer", "bio": "Manages the resources center and supports community access.", "photo": "/uploads/Yayah N Senesie Resources Center officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-11", "name": "James Mustapha Tailu", "role": "Education Officer", "bio": "Coordinates education programs and outreach.", "photo": "/uploads/James Mustapha Tailu Education Officer.jpg", "category": "Coordinator"},
-  {"id": "coordinator-12", "name": "Hawanatu Konneh", "role": "Procurement Officer", "bio": "Manages procurement and supply chain operations.", "photo": "/uploads/Hawanatu Konneh Procurement Officer.jpg", "category": "Coordinator"},
-
-  {"id": "intern-group-2025", "name": "Internship Cohort 2025", "community": "2025 Cohort", "bio": "Meet our 2025 internship cohort, a group of passionate and dedicated interns making a difference this year.", "photo": "/uploads/interns-2025.jpg", "category": "Intern Group"}
+  },
+  { "id": "coordinator-1", "name": "Sidikie Mansaray", "role": "Logistics Officer", "bio": "Coordinates logistics and ensures smooth operations.", "photo": "/uploads/Sidikie Mansaray Logistics Officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-2", "name": "Aminata K Alpha", "role": "Receptionist", "bio": "Welcomes visitors and manages front desk operations.", "photo": "/uploads/Aminata K Alpha Receptionist.jpg", "category": "Coordinator" },
+  { "id": "coordinator-3", "name": "Bockarie Emmanuel Ansumana", "role": "Admin officer", "bio": "Handles administrative tasks and supports office operations.", "photo": "/uploads/Bockarie Emmanuel Ansumana Admin officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-4", "name": "Genda Michael Siaka", "role": "Communications and Education Coordinator", "bio": "Coordinates communications and educational outreach.", "photo": "/uploads/Genda Michael Siaka Communications and Education Coordinator.jpg", "category": "Coordinator" },
+  { "id": "coordinator-5", "name": "Joseph Saffa Bockarie", "role": "Education officer", "bio": "Supports education programs and initiatives.", "photo": "/uploads/Joseph Saffa Bockarie Education officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-6", "name": "Prince Alpha Karnagboi", "role": "Child Protection and safeguarding officer", "bio": "Ensures child protection and safeguarding standards.", "photo": "/uploads/Prince Alpha Karnagboi Child Protection and safeguarding officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-7", "name": "Mary Sia Boima", "role": "Social Services and Public Health Officer", "bio": "Delivers social services and public health support.", "photo": "/uploads/Mary Sia Boima Social Services and Public Health Officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-8", "name": "Hassan A Conteh", "role": "Social Services and Public Health officer", "bio": "Provides public health and social services.", "photo": "/uploads/Hassan A ContehSocial Services and Public Health officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-9", "name": "Lahai Aruna Jagbagee Bonnie.", "role": "Social Services and Public Health officer", "bio": "Supports public health and social service programs.", "photo": "/uploads/Lahai Aruna Jagbagee Bonnie. Social Services and Public Health officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-10", "name": "Yayah N Senesie", "role": "Resources Center officer", "bio": "Manages the resources center and supports community access.", "photo": "/uploads/Yayah N Senesie Resources Center officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-11", "name": "James Mustapha Tailu", "role": "Education Officer", "bio": "Coordinates education programs and outreach.", "photo": "/uploads/James Mustapha Tailu Education Officer.jpg", "category": "Coordinator" },
+  { "id": "coordinator-12", "name": "Hawanatu Konneh", "role": "Procurement Officer", "bio": "Manages procurement and supply chain operations.", "photo": "/uploads/Hawanatu Konneh Procurement Officer.jpg", "category": "Coordinator" },
+  { "id": "intern-group-2025", "name": "Internship Cohort 2025", "community": "2025 Cohort", "bio": "Meet our 2025 internship cohort, a group of passionate and dedicated interns making a difference this year.", "photo": "/uploads/interns-2025.jpg", "category": "Intern Group" }
 ]
