@@ -1,0 +1,1 @@
+import{S as r}from"./supabaseClient-CVOyIDca.js";function e(t){return t?t.startsWith("http://")||t.startsWith("https://")||t.startsWith("/uploads")||t.startsWith("/lovable-uploads")?t:`${r}/storage/v1/object/public/uploads/${t}`:""}export{e as g};

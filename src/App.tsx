@@ -1,4 +1,3 @@
-import AdminRoutes from './pages/AdminRoutes';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -53,8 +52,6 @@ const App = () => (
         <Suspense fallback={<div className="py-20 text-center text-lg">Loading...</div>}>
           <Routes>
             <Route path="/" element={<Index />} />
-            {/* Admin dashboard routes */}
-            <Route path="/admin/*" element={<AdminRoutes />} />
             <Route path="/about" element={<About />} />
             <Route path="/mission-vision" element={<MissionVision />} />
             <Route path="/history" element={<History />} />

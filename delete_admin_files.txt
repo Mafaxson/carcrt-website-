@@ -1,0 +1,13 @@
+src/pages/AdminRoutes.tsx
+src/pages/AdminLogin.tsx
+src/pages/AdminDashboardNew.tsx
+src/pages/AdminDashboard.tsx
+src/pages/Admin.tsx
+src/components/AdminDashboard.tsx
+src/components/admin/PartnersAdmin.tsx
+src/components/admin/NewsAdmin.tsx
+src/components/admin/LeadershipAdmin.tsx
+src/components/admin/ImpactStoriesAdmin.tsx
+src/components/admin/GalleryAdmin.tsx
+src/components/admin/EventsAdmin.tsx
+src/components/admin/CommunityStatsAdmin.tsx
