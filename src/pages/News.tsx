@@ -54,12 +54,16 @@ export default function News() {
           .select('*')
           .order('date', { ascending: false });
         console.log('Supabase News Data:', data);
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase News Error:', error);
+          throw error;
+        }
         setAllNews(data || []);
         setFilteredNews(data || []);
       } catch (error) {
         setAllNews([]);
         setFilteredNews([]);
+        console.error('Supabase News Fetch Exception:', error);
       }
     };
     fetchNews();

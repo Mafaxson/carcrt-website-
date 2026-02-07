@@ -17,10 +17,14 @@ function Leadership() {
       try {
         const { data, error } = await supabase.from('leadership').select('*');
         console.log('Supabase Leadership Data:', data);
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase Leadership Error:', error);
+          throw error;
+        }
         setData(data || []);
       } catch (err) {
         setData([]);
+        console.error('Supabase Leadership Fetch Exception:', err);
       }
     };
     fetchLeadership();
