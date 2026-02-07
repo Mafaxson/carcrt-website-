@@ -15,7 +15,7 @@ function Leadership() {
   useEffect(() => {
     const fetchLeadership = async () => {
       try {
-        const { data, error } = await supabase.from('leadership').select('*');
+        const { data, error } = await supabase.from('public.leadership').select('*');
         if (error) throw error;
         setData(data || []);
       } catch (err) {

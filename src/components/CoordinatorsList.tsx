@@ -20,7 +20,7 @@ const CoordinatorsList: React.FC = () => {
   useEffect(() => {
     const fetchCoordinators = async () => {
       try {
-        const { data, error } = await supabase.from('leadership').select('*');
+        const { data, error } = await supabase.from('public.leadership').select('*');
         if (error) throw error;
         setCoordinators((data || []).filter((c: Coordinator) => c.category === 'Coordinator'));
       } catch (err: any) {
