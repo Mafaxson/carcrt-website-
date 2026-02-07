@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { Card } from './ui/card';
+import { supabase } from '@/lib/supabaseClient';
 
 interface Coordinator {
   id: string;
@@ -16,19 +18,19 @@ const CoordinatorsList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/leadership.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load coordinators data');
-        return res.json();
-      })
-      .then((json) => {
-        setCoordinators(json.filter((c: Coordinator) => c.category === 'Coordinator'));
+    const fetchCoordinators = async () => {
+      try {
+        const { data, error } = await supabase.from('leadership').select('*');
+        if (error) throw error;
+        setCoordinators((data || []).filter((c: Coordinator) => c.category === 'Coordinator'));
+      } catch (err: any) {
+        setCoordinators([]);
+        setError('Failed to load coordinators data.');
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      }
+    };
+    fetchCoordinators();
   }, []);
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading coordinators...</div>;
