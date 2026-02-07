@@ -16,19 +16,19 @@ const InternGroupsList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/leadership.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load intern groups data');
-        return res.json();
-      })
-      .then((json) => {
-        setInternGroups(json.filter((g: InternGroup) => g.category === 'Intern Group'));
+    const fetchInternGroups = async () => {
+      try {
+        const { data, error } = await supabase.from('leadership').select('*');
+        if (error) throw error;
+        setInternGroups((data || []).filter((g: InternGroup) => g.category === 'Intern Group'));
+      } catch (err: any) {
+        setInternGroups([]);
+        setError('Failed to load intern groups data.');
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      }
+    };
+    fetchInternGroups();
   }, []);
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading intern groups...</div>;

@@ -13,9 +13,16 @@ function Leadership() {
   const [data, setData] = useState<any[]>([]);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
   useEffect(() => {
-    fetch('/data/leadership.json')
-      .then((res) => res.json())
-      .then((json) => setData(json));
+    const fetchLeadership = async () => {
+      try {
+        const { data, error } = await supabase.from('leadership').select('*');
+        if (error) throw error;
+        setData(data || []);
+      } catch (err) {
+        setData([]);
+      }
+    };
+    fetchLeadership();
   }, []);
 
   const leadershipTeam = data.filter((m) => m.category === 'Leadership');

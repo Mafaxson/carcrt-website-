@@ -16,13 +16,19 @@ const LeadershipList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/data/leadership.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setLeaders(data.filter((item: Leader) => item.category === "Leadership"));
+    const fetchLeaders = async () => {
+      try {
+        const { data, error } = await supabase.from('leadership').select('*');
+        if (error) throw error;
+        setLeaders((data || []).filter((item: Leader) => item.category === "Leadership"));
+      } catch (err) {
+        setLeaders([]);
+        setError('Failed to load leadership team data.');
+      } finally {
         setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      }
+    };
+    fetchLeaders();
   }, []);
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading leadership team...</div>;

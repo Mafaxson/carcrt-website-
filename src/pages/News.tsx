@@ -47,7 +47,6 @@ export default function News() {
   };
 
   useEffect(() => {
-    // Try to fetch from Supabase first
     const fetchNews = async () => {
       try {
         const { data, error } = await supabase
@@ -55,32 +54,11 @@ export default function News() {
           .select('*')
           .order('date', { ascending: false });
         if (error) throw error;
-        if (data && data.length > 0) {
-          setAllNews(data);
-          setFilteredNews(data);
-        } else {
-          // Fallback to static JSON if Supabase is empty
-          fetch('/data/news.json')
-            .then((res) => res.json())
-            .then((json) => {
-              setAllNews(json);
-              setFilteredNews(json);
-            })
-            .catch((err) => {
-              console.error('Failed to fetch news from fallback JSON:', err);
-            });
-        }
+        setAllNews(data || []);
+        setFilteredNews(data || []);
       } catch (error) {
-        // Fallback to static JSON if Supabase fails
-        fetch('/data/news.json')
-          .then((res) => res.json())
-          .then((json) => {
-            setAllNews(json);
-            setFilteredNews(json);
-          })
-          .catch((err) => {
-            console.error('Failed to fetch news from fallback JSON:', err);
-          });
+        setAllNews([]);
+        setFilteredNews([]);
       }
     };
     fetchNews();
