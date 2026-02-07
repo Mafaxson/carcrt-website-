@@ -10,7 +10,7 @@ const navItems = [{
 }, {
   label: "About",
   children: [{
-    label: "About Us",
+    label: "About",
     path: "/about"
   }, {
     label: "Mission & Vision",

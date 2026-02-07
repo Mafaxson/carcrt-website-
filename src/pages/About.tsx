@@ -48,32 +48,27 @@ export default function About() {
         </div>
       </section>
 
-      {/* Leadership Section */}
+
+      {/* Leadership, Coordinators, and Internship Sections Combined */}
       <section className="section-padding bg-background">
         <div className="container-custom">
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Our Leadership</h2>
           <p className="text-lg text-muted-foreground mb-2 text-center">Meet the dedicated team driving community transformation across Sierra Leone</p>
+
           <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2 text-center">Leadership Team</h3>
           <p className="text-lg text-muted-foreground mb-8 text-center">Our core team bringing expertise and passion to community development</p>
           <LeadershipList />
-        </div>
-      </section>
+          {/* If no data, LeadershipList will show 'No leadership team data found.' */}
 
-      {/* Coordinators Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Meet Our Team</h2>
+          <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2 text-center mt-12">Meet Our Team</h3>
           <p className="text-lg text-muted-foreground mb-8 text-center">Dedicated coordinators working across regions to drive community transformation</p>
           <CoordinatorsList />
-        </div>
-      </section>
+          {/* If no data, CoordinatorsList will show 'No coordinators found.' */}
 
-      {/* Intern Groups Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">Internship</h2>
+          <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2 text-center mt-12">Internship</h3>
           <p className="text-lg text-muted-foreground mb-8 text-center">CArCRT Internship Cohorts by Year</p>
           <InternGroupsList />
+          {/* If no data, InternGroupsList will show 'No intern groups found.' */}
         </div>
       </section>
 
