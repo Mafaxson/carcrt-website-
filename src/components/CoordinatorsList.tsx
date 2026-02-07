@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Card } from './ui/card';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../lib/supabase';
 
 interface Coordinator {
   id: string;
