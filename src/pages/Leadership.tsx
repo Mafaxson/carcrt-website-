@@ -16,6 +16,7 @@ function Leadership() {
     const fetchLeadership = async () => {
       try {
         const { data, error } = await supabase.from('public.leadership').select('*');
+        console.log('Supabase Leadership Data:', data);
         if (error) throw error;
         setData(data || []);
       } catch (err) {

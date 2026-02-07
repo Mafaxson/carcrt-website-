@@ -53,6 +53,7 @@ export default function News() {
           .from('public.news')
           .select('*')
           .order('date', { ascending: false });
+        console.log('Supabase News Data:', data);
         if (error) throw error;
         setAllNews(data || []);
         setFilteredNews(data || []);
