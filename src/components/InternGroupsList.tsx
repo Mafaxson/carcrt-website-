@@ -18,7 +18,7 @@ const InternGroupsList: React.FC = () => {
   useEffect(() => {
     const fetchInternGroups = async () => {
       try {
-        const { data, error } = await supabase.from('public.leadership').select('*');
+        const { data, error } = await supabase.from('leadership').select('*');
         if (error) throw error;
         setInternGroups((data || []).filter((g: InternGroup) => g.category === 'Intern Group'));
       } catch (err: any) {

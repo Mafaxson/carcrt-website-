@@ -50,7 +50,7 @@ export default function News() {
     const fetchNews = async () => {
       try {
         const { data, error } = await supabase
-          .from('public.news')
+          .from('news')
           .select('*')
           .order('date', { ascending: false });
         console.log('Supabase News Data:', data);

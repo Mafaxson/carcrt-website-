@@ -18,7 +18,7 @@ const LeadershipList: React.FC = () => {
   useEffect(() => {
     const fetchLeaders = async () => {
       try {
-        const { data, error } = await supabase.from('public.leadership').select('*');
+        const { data, error } = await supabase.from('leadership').select('*');
         if (error) throw error;
         setLeaders((data || []).filter((item: Leader) => item.category === "Leadership"));
       } catch (err) {
