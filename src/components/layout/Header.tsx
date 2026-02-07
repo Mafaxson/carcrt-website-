@@ -9,19 +9,20 @@ const navItems = [{
   path: "/"
 }, {
   label: "About",
-  children: [{
-    label: "About",
-    path: "/about"
-  }, {
-    label: "Mission & Vision",
-    path: "/mission-vision"
-  }, {
-    label: "History",
-    path: "/history"
-  }, {
-    label: "Leadership",
-    path: "/leadership"
-  }]
+  children: [
+    {
+      label: "Mission & Vision",
+      path: "/mission-vision"
+    },
+    {
+      label: "History",
+      path: "/history"
+    },
+    {
+      label: "Leadership",
+      path: "/leadership"
+    }
+  ]
 }, {
   label: "Programs",
   path: "/programs"
