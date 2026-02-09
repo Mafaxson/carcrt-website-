@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ImageLightbox } from "@/components/ImageLightbox";
-// Only using static JSON for all data
+import { supabase } from '../lib/supabase';
 
 function Leadership() {
   const [data, setData] = useState<any[]>([]);
@@ -16,11 +16,7 @@ function Leadership() {
     const fetchLeadership = async () => {
       try {
         const { data, error } = await supabase.from('leadership').select('*');
-        console.log('Supabase Leadership Data:', data);
-        if (error) {
-          console.error('Supabase Leadership Error:', error);
-          throw error;
-        }
+        if (error) throw error;
         setData(data || []);
       } catch (err) {
         setData([]);

@@ -4,9 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Target, Globe, Handshake } from "lucide-react";
-import LeadershipList from "@/components/LeadershipList";
-import CoordinatorsList from "@/components/CoordinatorsList";
-import InternGroupsList from "@/components/InternGroupsList";
+// Leadership sections are now only on the Leadership page
 
 const highlights = [
   {
