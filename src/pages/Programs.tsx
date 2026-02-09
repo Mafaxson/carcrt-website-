@@ -31,14 +31,47 @@ const iconMap = {
 export default function Programs() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
   const [programs, setPrograms] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPrograms = async () => {
       const { data, error } = await supabase.from('programs').select('*').order('title');
-      if (!error && data) setPrograms(data);
+      console.log('Supabase data:', data);
+      console.log('Supabase error:', error);
+      if (error) {
+        setErrorMsg(error.message || 'Error fetching data');
+      }
+      setPrograms(data || []);
+      setLoading(false);
     };
     fetchPrograms();
   }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading programs...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (errorMsg) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-destructive">{errorMsg}</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -67,49 +100,55 @@ export default function Programs() {
       <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="space-y-12">
-            {programs.map((program, index) => (
-              <Card
-                key={program.id || index}
-                className="overflow-hidden border-none shadow-card animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-0">
-                  <div className="grid md:grid-cols-[2fr,3fr]">
-                    <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col justify-center items-center">
-                      {program.image ? (
-                        <img 
-                          src={program.image} 
-                          alt={program.title}
-                          className="w-full h-56 rounded-lg mb-6 object-cover shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
-                          onClick={() => setLightboxImage({ src: program.image, alt: program.title })}
-                        />
-                      ) : (
-                        <div className={`${program.color || 'bg-secondary'} p-8 rounded-full mb-6`}>
-                          {iconMap[program.title] && (
-                            <iconMap[program.title] className="h-16 w-16 text-primary-foreground" />
-                          )}
-                        </div>
-                      )}
-                      <h3 className="font-heading text-lg font-bold text-center text-foreground px-4">{program.title}</h3>
+            {programs.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No programs found.</p>
+              </div>
+            ) : (
+              programs.map((program, index) => (
+                <Card
+                  key={program.id || index}
+                  className="overflow-hidden border-none shadow-card animate-fade-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-0">
+                    <div className="grid md:grid-cols-[2fr,3fr]">
+                      <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col justify-center items-center">
+                        {program.image ? (
+                          <img 
+                            src={program.image} 
+                            alt={program.title}
+                            className="w-full h-56 rounded-lg mb-6 object-cover shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => setLightboxImage({ src: program.image, alt: program.title })}
+                          />
+                        ) : (
+                          <div className={`${program.color || 'bg-secondary'} p-8 rounded-full mb-6`}>
+                            {iconMap[program.title] && (
+                              <iconMap[program.title] className="h-16 w-16 text-primary-foreground" />
+                            )}
+                          </div>
+                        )}
+                        <h3 className="font-heading text-lg font-bold text-center text-foreground px-4">{program.title}</h3>
+                      </div>
+                      <div className="md:col-span-1 p-8">
+                        <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
+                        <h4 className="font-heading font-semibold text-foreground mb-4">Key Activities:</h4>
+                        <ul className="grid sm:grid-cols-2 gap-3">
+                          {Array.isArray(program.key_activities)
+                            ? program.key_activities.map((detail: string, i: number) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                  <span className={`w-2 h-2 rounded-full ${program.color || 'bg-secondary'} mt-1.5 flex-shrink-0`} />
+                                  <span>{detail}</span>
+                                </li>
+                              ))
+                            : null}
+                        </ul>
+                      </div>
                     </div>
-                    <div className="md:col-span-1 p-8">
-                      <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
-                      <h4 className="font-heading font-semibold text-foreground mb-4">Key Activities:</h4>
-                      <ul className="grid sm:grid-cols-2 gap-3">
-                        {Array.isArray(program.key_activities)
-                          ? program.key_activities.map((detail: string, i: number) => (
-                              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                <span className={`w-2 h-2 rounded-full ${program.color || 'bg-secondary'} mt-1.5 flex-shrink-0`} />
-                                <span>{detail}</span>
-                              </li>
-                            ))
-                          : null}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </section>
