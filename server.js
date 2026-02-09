@@ -7,363 +7,143 @@ import cors from "cors";
 import multer from "multer";
 import nodemailer from "nodemailer";
 import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+// Disabled: upload middleware not defined
+// app.post("/api/admin/news", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'document', maxCount: 1 }]), (req, res) => {
+//   try {
+//     const { password, title, category, excerpt, content, date, link, videoUrl } = req.body;
+//     if (!verifyAdmin(password)) {
+//       return res.status(401).json({ error: "Unauthorized" });
+//     }
+//     
+//     const news = readNews();
+//     let parsedCategory;
+//     if (Array.isArray(category)) {
+//       parsedCategory = category;
+//     } else if (typeof category === 'string') {
+//       try {
+//         parsedCategory = JSON.parse(category);
+//         // Handle double-stringified JSON
+//         while (typeof parsedCategory === 'string') {
+//           parsedCategory = JSON.parse(parsedCategory);
+//         }
+//       } catch {
+//         parsedCategory = [category];
+//       }
+//     } else {
+//       parsedCategory = ["General"];
+//     }
+//     
+//     const newArticle = {
+//       id: `news-${Date.now()}`,
+//       title,
+//       category: parsedCategory,
+//       excerpt,
+//       content,
+//       date: date || new Date().toISOString().split('T')[0],
+//       link: link || "",
+//       videoUrl: videoUrl || "",
+//       image: req.files?.image?.[0] ? `/uploads/${req.files.image[0].filename}` : null,
+//       document: req.files?.document?.[0] ? `/uploads/${req.files.document[0].filename}` : null,
+//     };
+//     
+//     news.push(newArticle);
+//     writeNews(news);
+//     res.status(201).json({ success: true, article: newArticle });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to add news" });
+//   }
+// });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// app.put("/api/admin/news/:id", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'document', maxCount: 1 }]), (req, res) => {
+//   try {
+//     const { password, title, category, excerpt, content, date, link, videoUrl } = req.body;
+//     if (!verifyAdmin(password)) {
+//       return res.status(401).json({ error: "Unauthorized" });
+//     }
+//     
+//     const news = readNews();
+// Minimal CommonJS Express server with unified /api/email endpoint
+const express = require('express');
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Email configuration
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || "smtp.hostinger.com",
-  port: process.env.EMAIL_PORT || 465,
-  secure: true, // use SSL
-  auth: {
-    user: process.env.EMAIL_USER || "CArCRT@carcrt.org",
-    pass: process.env.EMAIL_PASSWORD || "CArCRT123@"
-  }
-});
-
-// Email sending helper
-// Send ALL outgoing emails ONLY to info@carcrt.org
-const MAIN_EMAIL = "info@carcrt.org";
-
-async function sendEmail(_to, subject, html) {
-  try {
-    // Ignore any provided 'to' and always send to info@carcrt.org only
-    const recipients = [MAIN_EMAIL];
-    const info = await transporter.sendMail({
-      from: '"CArCRT Website" <CArCRT@carcrt.org>',
-      to: recipients,
-      subject: subject,
-      html: html
-    });
-    console.log(`✅ Email sent successfully to ${recipients}`);
-    console.log(`   Message ID: ${info.messageId}`);
-    return info;
-  } catch (error) {
-    console.error(`❌ Email error sending to info@carcrt.org:`, error.message);
-    console.error("   Full error:", error);
-    throw error;
-  }
-}
-
-// TEST EMAIL ENDPOINT (for troubleshooting)
-app.post("/api/test-email", async (req, res) => {
-  try {
-    const { to } = req.body;
-    if (!to) {
-      return res.status(400).json({ error: "Missing 'to' email address" });
-    }
-    await sendEmail(
-      to,
-      "Test Email from CArCRT Website",
-      `<h2>This is a test email from your CArCRT website backend.</h2><p>If you received this, your server can send emails.</p>`
-    );
-    res.json({ success: true, message: `Test email sent to ${to}` });
-  } catch (error) {
-    res.status(500).json({ error: error.message || "Failed to send test email" });
-  }
-});
-
-// Middleware
 app.use(cors());
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json());
 
-// Serve static files
-app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
-
-// Storage setup for images
-const uploadsDir = path.join(__dirname, "public/uploads");
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadsDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: parseInt(process.env.EMAIL_PORT, 10),
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-const upload = multer({ storage });
+const MAIN_EMAIL = 'info@carcrt.org';
 
-// Database file paths
-const dataDir = path.join(__dirname, "data");
-const storiesDbPath = path.join(dataDir, "stories.json");
-const statsDbPath = path.join(dataDir, "stats.json");
-const partnersDbPath = path.join(dataDir, "partners.json");
-// All admin endpoints and logic removed
-
-function writeNews(news) {
-  fs.writeFileSync(newsDbPath, JSON.stringify(news, null, 2));
-}
-
-function readEvents() {
+app.post('/api/email', async (req, res) => {
   try {
-    const data = fs.readFileSync(eventsDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
+    const { type, data } = req.body;
+    let subject = '';
+    let html = '';
 
-function writeEvents(events) {
-  fs.writeFileSync(eventsDbPath, JSON.stringify(events, null, 2));
-}
-
-function readLeadership() {
-  try {
-    const data = fs.readFileSync(leadershipDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-function writeLeadership(leadership) {
-  fs.writeFileSync(leadershipDbPath, JSON.stringify(leadership, null, 2));
-}
-
-function readCoordinators() {
-  try {
-    const data = fs.readFileSync(coordinatorsDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-function writeCoordinators(coordinators) {
-  fs.writeFileSync(coordinatorsDbPath, JSON.stringify(coordinators, null, 2));
-}
-
-function readRepresentatives() {
-  try {
-    const data = fs.readFileSync(representativesDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-function writeRepresentatives(representatives) {
-  fs.writeFileSync(representativesDbPath, JSON.stringify(representatives, null, 2));
-}
-
-function readCoachingPartners() {
-  try {
-    const data = fs.readFileSync(coachingPartnersDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-function writeCoachingPartners(partners) {
-  fs.writeFileSync(coachingPartnersDbPath, JSON.stringify(partners, null, 2));
-}
-
-function readSubmissions() {
-  try {
-    const data = fs.readFileSync(submissionsDbPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-function writeSubmissions(submissions) {
-  fs.writeFileSync(submissionsDbPath, JSON.stringify(submissions, null, 2));
-}
-
-function logSubmission(type, data) {
-  const submissions = readSubmissions();
-  const submission = {
-    id: `sub-${Date.now()}`,
-    type,
-    data,
-    timestamp: new Date().toISOString(),
-    read: false
-  };
-  submissions.push(submission);
-  writeSubmissions(submissions);
-  
-  // Log to console for immediate visibility
-  console.log(`\n========== NEW ${type.toUpperCase()} SUBMISSION ==========`);
-  console.log(`Time: ${new Date().toLocaleString()}`);
-  console.log(`Type: ${type}`);
-  console.log('Data:', JSON.stringify(data, null, 2));
-  console.log('===================================================\n');
-  
-  return submission;
-}
-
-// Admin logic removed
-
-// Routes
-
-// --- Intern Groups API (moved below app initialization) ---
-// Get all intern groups
-app.get('/api/intern-groups', (req, res) => {
-  db.all('SELECT * FROM intern_groups', [], (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(rows);
-  });
-});
-
-// Add a new intern group
-app.post('/api/intern-groups', (req, res) => {
-  const { id, name, community, bio, photo } = req.body;
-  db.run(
-    'INSERT INTO intern_groups (id, name, community, bio, photo) VALUES (?, ?, ?, ?, ?)',
-    [id, name, community, bio, photo],
-    function (err) {
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ id, name, community, bio, photo });
-    }
-  );
-});
-
-// Update an intern group
-app.put('/api/intern-groups/:id', (req, res) => {
-  const { name, community, bio, photo } = req.body;
-  db.run(
-    'UPDATE intern_groups SET name=?, community=?, bio=?, photo=? WHERE id=?',
-    [name, community, bio, photo, req.params.id],
-    function (err) {
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ id: req.params.id, name, community, bio, photo });
-    }
-  );
-});
-
-
-
-// Admin: Get all stories (including unapproved)
-app.get("/api/admin/stories", (req, res) => {
-  try {
-    const { password } = req.query;
-
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
+    if (type === 'donation') {
+      subject = 'New Donation Submission';
+      html = `
+        <h2>Donation Form Submission</h2>
+        <p><strong>Full Name:</strong> ${data.fullName}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Amount (USD):</strong> ${data.amount}</p>
+        <p><strong>Donation Frequency:</strong> ${data.frequency}</p>
+        <p><strong>Payment Method:</strong> ${data.paymentMethod}</p>
+        <p><strong>Message:</strong> ${data.message || 'N/A'}</p>
+      `;
+    } else if (type === 'volunteer') {
+      subject = 'New Volunteer Submission';
+      html = `
+        <h2>Volunteer / Get Involved Form Submission</h2>
+        <p><strong>Full Name:</strong> ${data.fullName}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Area of Interest:</strong> ${data.areaOfInterest}</p>
+        <p><strong>Skills and Expertise:</strong> ${data.skills}</p>
+        <p><strong>Previous Experience:</strong> ${data.experience}</p>
+        <p><strong>Reason for Volunteering:</strong> ${data.reason}</p>
+      `;
+    } else if (type === 'contact') {
+      subject = 'New Contact Submission';
+      html = `
+        <h2>Contact Form Submission</h2>
+        <p><strong>Full Name:</strong> ${data.fullName}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Subject:</strong> ${data.subject}</p>
+        <p><strong>Message:</strong> ${data.message}</p>
+      `;
+    } else {
+      return res.status(400).json({ success: false, message: 'Invalid form type.' });
     }
 
-    const stories = readStories();
-    res.json(stories);
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: MAIN_EMAIL,
+      subject,
+      html,
+    });
+    res.json({ success: true, message: 'Email sent successfully.' });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch stories" });
+    res.status(500).json({ success: false, message: 'Failed to send email.', error: error.message });
   }
 });
 
-// Admin: Approve story
-app.put("/api/admin/stories/:id/approve", (req, res) => {
-  try {
-    const { password } = req.body;
-
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const stories = readStories();
-    const storyIndex = stories.findIndex((s) => s.id === req.params.id);
-
-    if (storyIndex === -1) {
-      return res.status(404).json({ error: "Story not found" });
-    }
-
-    stories[storyIndex].approved = true;
-    writeStories(stories);
-
-    res.json({ success: true, message: "Story approved", story: stories[storyIndex] });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to approve story" });
-  }
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-// Admin: Delete story
-app.delete("/api/admin/stories/:id", (req, res) => {
-  try {
-    const { password } = req.body;
-
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const stories = readStories();
-    const storyIndex = stories.findIndex((s) => s.id === req.params.id);
-
-    if (storyIndex === -1) {
-      return res.status(404).json({ error: "Story not found" });
-    }
-
-    // Delete image file if exists
-    const story = stories[storyIndex];
-    if (story.imageUrl) {
-      const imagePath = path.join(__dirname, "public", story.imageUrl);
-      if (fs.existsSync(imagePath)) {
-        fs.unlinkSync(imagePath);
-      }
-    }
-
-    stories.splice(storyIndex, 1);
-    writeStories(stories);
-
-    res.json({ success: true, message: "Story deleted" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to delete story" });
-  }
-});
-
-// Admin: Update story
-app.put("/api/admin/stories/:id", (req, res) => {
-  try {
-    const { password, name, story, category } = req.body;
-
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const stories = readStories();
-    const storyIndex = stories.findIndex((s) => s.id === req.params.id);
-
-    if (storyIndex === -1) {
-      return res.status(404).json({ error: "Story not found" });
-    }
-
-    if (name) stories[storyIndex].name = name;
-    if (story) stories[storyIndex].story = story;
-    if (category) stories[storyIndex].category = category;
-
-    writeStories(stories);
-
-    res.json({ success: true, message: "Story updated", story: stories[storyIndex] });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to update story" });
-  }
-});
-
-// Serve uploaded images
-app.use("/uploads", express.static(uploadsDir));
-
-// Health check
-app.get("/api/health", (req, res) => {
-  res.json({ status: "Server is running" });
-});
-
-// ===== STATS ENDPOINTS =====
-app.get("/api/stats", (req, res) => {
-  try {
-    const stats = readStats();
-    res.json(stats);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch stats" });
   }
 });
 
@@ -391,29 +171,30 @@ app.get("/api/partners", (req, res) => {
   }
 });
 
-app.post("/api/admin/partners", upload.single("logo"), (req, res) => {
-  try {
-    const { password, name, type, website } = req.body;
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-    
-    const partners = readPartners();
-    const newPartner = {
-      id: `partner-${Date.now()}`,
-      name,
-      type: type || "Partner",
-      website: website || "",
-      logo: req.file ? `/uploads/${req.file.filename}` : null,
-    };
-    
-    partners.push(newPartner);
-    writePartners(partners);
-    res.status(201).json({ success: true, partner: newPartner });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to add partner" });
-  }
-});
+// Disabled: upload middleware not defined
+// app.post("/api/admin/partners", upload.single("logo"), (req, res) => {
+//   try {
+//     const { password, name, type, website } = req.body;
+//     if (!verifyAdmin(password)) {
+//       return res.status(401).json({ error: "Unauthorized" });
+//     }
+//     
+//     const partners = readPartners();
+//     const newPartner = {
+//       id: `partner-${Date.now()}`,
+//       name,
+//       type: type || "Partner",
+//       website: website || "",
+//       logo: req.file ? `/uploads/${req.file.filename}` : null,
+//     };
+//     
+//     partners.push(newPartner);
+//     writePartners(partners);
+//     res.status(201).json({ success: true, partner: newPartner });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to add partner" });
+//   }
+// });
 
 app.delete("/api/admin/partners/:id", (req, res) => {
   try {
@@ -590,28 +371,29 @@ app.get("/api/news", (req, res) => {
   }
 });
 
-app.post("/api/admin/news", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'document', maxCount: 1 }]), (req, res) => {
-  try {
-    const { password, title, category, excerpt, content, date, link, videoUrl } = req.body;
-    if (!verifyAdmin(password)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-    
-    const news = readNews();
-    let parsedCategory;
-    if (Array.isArray(category)) {
-      parsedCategory = category;
-    } else if (typeof category === 'string') {
-      try {
-        parsedCategory = JSON.parse(category);
-        // Handle double-stringified JSON
-        while (typeof parsedCategory === 'string') {
-          parsedCategory = JSON.parse(parsedCategory);
-        }
-      } catch {
-        parsedCategory = [category];
-      }
-    } else {
+// Disabled: upload middleware not defined
+// app.post("/api/admin/news", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'document', maxCount: 1 }]), (req, res) => {
+//   try {
+//     const { password, title, category, excerpt, content, date, link, videoUrl } = req.body;
+//     if (!verifyAdmin(password)) {
+//       return res.status(401).json({ error: "Unauthorized" });
+//     }
+//     
+//     const news = readNews();
+//     let parsedCategory;
+//     if (Array.isArray(category)) {
+//       parsedCategory = category;
+//     } else if (typeof category === 'string') {
+//       try {
+//         parsedCategory = JSON.parse(category);
+//         // Handle double-stringified JSON
+//         while (typeof parsedCategory === 'string') {
+//           parsedCategory = JSON.parse(parsedCategory);
+//         }
+//       } catch {
+//         parsedCategory = [category];
+//       }
+//     } else {
       parsedCategory = ["General"];
     }
     

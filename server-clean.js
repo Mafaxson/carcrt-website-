@@ -1,5 +1,4 @@
 // Minimal CommonJS Express server with unified /api/email endpoint
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -13,14 +12,14 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: parseInt(process.env.EMAIL_PORT, 10),
-  secure: parseInt(process.env.EMAIL_PORT, 10) === 465, // true for 465, false otherwise
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-const MAIN_EMAIL = process.env.EMAIL_USER;
+const MAIN_EMAIL = 'info@carcrt.org';
 
 app.post('/api/email', async (req, res) => {
   try {
@@ -32,16 +31,16 @@ app.post('/api/email', async (req, res) => {
       subject = 'New Donation Submission';
       html = `
         <h2>Donation Form Submission</h2>
-        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Full Name:</strong> ${data.fullName}</p>
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Phone:</strong> ${data.phone}</p>
         <p><strong>Amount (USD):</strong> ${data.amount}</p>
-        <p><strong>Donation Frequency:</strong> ${data.donationFrequency}</p>
+        <p><strong>Donation Frequency:</strong> ${data.frequency}</p>
         <p><strong>Payment Method:</strong> ${data.paymentMethod}</p>
         <p><strong>Message:</strong> ${data.message || 'N/A'}</p>
       `;
     } else if (type === 'volunteer') {
-      subject = 'New Volunteer/Get-Involved Submission';
+      subject = 'New Volunteer Submission';
       html = `
         <h2>Volunteer / Get Involved Form Submission</h2>
         <p><strong>Full Name:</strong> ${data.fullName}</p>
