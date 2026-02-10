@@ -15,7 +15,7 @@ const partners = [
     description:
       "Restoring AgriSolution Enterprises is a social-impact agribusiness committed to transforming rural livelihoods through sustainable agriculture, value chain development, and climate-smart innovations. Operating in Sierra Leone, the enterprise aims to increase food security, generate employment, and empower smallholder farmers particularly women and youth through integrated services and market access. Restoring AgriSolution Enterprises is a dynamic agri-business established in 2021 in Nongowa chiefdom. As a locally rooted enterprise, it is committed to cultivating crops and providing training on Agri business for women and youths with a strategic focus on rice, cassava, potato, Vegetables and maize farming. Restoring AgriSolution Enterprises concentrates on improving production, processing, and marketing. Despite facing significant hurdles including poor road infrastructure, pest infestations, erratic weather patterns, and the high cost of equipment the enterprise continues to apply innovative and climate-smart farming techniques to drive impact and resilience. At the heart of Restoring AgriSolution Enterprise's mission is a deep concern for food insecurity among vulnerable populations. Over 80% of children from low-income households lack access to nutritious, high-quality food, leading to widespread malnutrition, illness, and preventable deaths. Alarmingly, 70% of these children's parents are unemployed or underpaid youth and single mothers, whose limited livelihood options further compound the crisis. Through its work, RestoringAgriSolution Enterprises seeks not only to produce food, but to nurture hope, restore dignity, and empower communities especially youth and women by creating inclusive agricultural opportunities and contributing to a healthier, more food-secure Sierra Leone.",
     focus: "Agriculture, Food Security, Youth & Women Empowerment",
-    logo: "/logos/restoring-agrisolution.png",
+    logo: "/uploads/ngo-logo.png", // Placeholder, update if you have the real logo
     type: "affiliate",
     gallery: [
       { image: "/gallery/restoring-agri-1.jpg", caption: "Training session" },
@@ -23,12 +23,12 @@ const partners = [
       { image: "/gallery/restoring-agri-3.jpg", caption: "Community outreach" },
     ],
   },
-  { id: 2, name: "Sierra Leone Red Cross", logo: "/logos/sierra-leone-red-cross.png", type: "partner" },
-  { id: 3, name: "Cross of Christ Association Sierra Leone", logo: "/logos/cross-of-christ.png", type: "partner" },
-  { id: 4, name: "Widows Empowerment SL", logo: "/logos/widows-empowerment.png", type: "partner" },
-  { id: 5, name: "Helping Hands Foundation", logo: "/logos/helping-hands.png", type: "partner" },
-  { id: 6, name: "AfrikSpark Tech Solutions", logo: "/logos/afrikspark.png", type: "partner", website: "https://afrikspark.com" },
-  { id: 7, name: "Trading Organic", logo: "/logos/trading-organic.png", type: "sponsor" },
+  { id: 2, name: "Sierra Leone Red Cross", logo: "/uploads/1764869162637-Sierra Leone Red Cross.jpg", type: "partner" },
+  { id: 3, name: "Cross of Christ Association Sierra Leone", logo: "/uploads/1764931846866-CCA-SL.jpg", type: "partner" },
+  { id: 4, name: "Widows Empowerment SL", logo: "/uploads/1764932004291-WEO SL .jpg", type: "partner" },
+  { id: 5, name: "Helping Hands Foundation", logo: "/uploads/1764932159889-WhatsApp Image 2025-12-04 at 18.25.14_5b808b53.jpg", type: "partner" },
+  { id: 6, name: "AfrikSpark Tech Solutions", logo: "/uploads/afrikspark-logo.png", type: "partner", website: "https://afrikspark.com" },
+  { id: 7, name: "Trading Organic", logo: "/uploads/1764943938537-WhatsApp Image 2025-12-05 at 13.55.47_0022de53.jpg", type: "sponsor" },
 ];
 
 export default function Partners() {
