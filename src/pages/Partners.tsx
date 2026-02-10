@@ -28,7 +28,7 @@ const partners = [
   { id: 4, name: "Widows Empowerment SL", logo: "/uploads/1764932004291-WEO SL .jpg", type: "partner" },
   { id: 5, name: "Helping Hands Foundation", logo: "/uploads/1764932159889-WhatsApp Image 2025-12-04 at 18.25.14_5b808b53.jpg", type: "partner" },
   { id: 6, name: "AfrikSpark Tech Solutions", logo: "/uploads/afrikspark-logo.png", type: "partner", website: "https://afrikspark.com" },
-  { id: 7, name: "Trading Organic", logo: "/uploads/ngo-logo.png", type: "sponsor" },
+  { id: 7, name: "Trading Organic", logo: "/uploads/trading-organic-logo.png", type: "sponsor" },
 ];
 
 export default function Partners() {
