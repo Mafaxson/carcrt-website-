@@ -1,0 +1,1 @@
+const s="https://rbxrelsauoqytwifdteq.supabase.co";function r(t){return t?t.startsWith("http://")||t.startsWith("https://")||t.startsWith("/uploads")||t.startsWith("/lovable-uploads")?t:`${s}/storage/v1/object/public/uploads/${t}`:""}export{r as g};
