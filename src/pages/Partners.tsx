@@ -7,6 +7,8 @@ import { Building2, Handshake, ArrowRight, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { getImageUrl } from "@/lib/imageUtils";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/SupabaseClient";
 
 const partners = [
   {
@@ -34,6 +36,30 @@ const partners = [
 export default function Partners() {
   const navigate = useNavigate();
   const affiliate = partners.find((p) => p.type === "affiliate");
+  const [dynamicPartners, setDynamicPartners] = useState([]);
+  const [dynamicSponsors, setDynamicSponsors] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data: partnersData } = await supabase
+        .from("partners_and_sponsors")
+        .select("name, website_url, logo_url")
+        .eq("category", "partner")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      setDynamicPartners(partnersData || []);
+
+      const { data: sponsorsData } = await supabase
+        .from("partners_and_sponsors")
+        .select("name, website_url, logo_url")
+        .eq("category", "sponsor")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      setDynamicSponsors(sponsorsData || []);
+    }
+    fetchData();
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -94,17 +120,19 @@ export default function Partners() {
             title="Our Partners"
             subtitle="Organizations we collaborate with to achieve our mission"
           />
-          {partners.filter((p) => p.type === "partner").length > 0 ? (
+          {dynamicPartners.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              {partners.filter((p) => p.type === "partner").map((partner) => (
-                <Card key={partner.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
+              {dynamicPartners.map((partner) => (
+                <Card key={partner.name} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex items-center gap-4 p-6">
-                    {partner.logo ? (
-                      <img
-                        src={partner.logo.startsWith("http") ? partner.logo : getImageUrl(partner.logo)}
-                        alt={partner.name + " logo"}
-                        className="w-20 h-20 object-cover rounded-full border"
-                      />
+                    {partner.logo_url ? (
+                      <a href={partner.website_url || "#"} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={partner.logo_url}
+                          alt={partner.name + " logo"}
+                          className="w-20 h-20 object-cover rounded-full border"
+                        />
+                      </a>
                     ) : (
                       <div className="w-20 h-20 flex items-center justify-center bg-muted rounded-full border">
                         <span className="text-xs text-muted-foreground text-center">No Logo</span>
@@ -112,9 +140,9 @@ export default function Partners() {
                     )}
                     <div>
                       <h3 className="font-bold text-lg mb-1">{partner.name}</h3>
-                      {partner.website && partner.website !== "No website" && (
+                      {partner.website_url && (
                         <a
-                          href={partner.website}
+                          href={partner.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 underline text-sm flex items-center gap-1"
@@ -139,17 +167,19 @@ export default function Partners() {
             title="Our Sponsors"
             subtitle="Organizations providing financial support for our programs"
           />
-          {partners.filter((p) => p.type === "sponsor").length > 0 ? (
+          {dynamicSponsors.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              {partners.filter((p) => p.type === "sponsor").map((sponsor) => (
-                <Card key={sponsor.id} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
+              {dynamicSponsors.map((sponsor) => (
+                <Card key={sponsor.name} className="card-hover border-none shadow-card animate-fade-up overflow-hidden">
                   <CardContent className="flex items-center gap-4 p-6">
-                    {sponsor.logo ? (
-                      <img
-                        src={sponsor.logo.startsWith("http") ? sponsor.logo : getImageUrl(sponsor.logo)}
-                        alt={sponsor.name + " logo"}
-                        className="w-20 h-20 object-cover rounded-full border"
-                      />
+                    {sponsor.logo_url ? (
+                      <a href={sponsor.website_url || "#"} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={sponsor.logo_url}
+                          alt={sponsor.name + " logo"}
+                          className="w-20 h-20 object-cover rounded-full border"
+                        />
+                      </a>
                     ) : (
                       <div className="w-20 h-20 flex items-center justify-center bg-muted rounded-full border">
                         <span className="text-xs text-muted-foreground text-center">No Logo</span>
@@ -157,9 +187,9 @@ export default function Partners() {
                     )}
                     <div>
                       <h3 className="font-bold text-lg mb-1">{sponsor.name}</h3>
-                      {sponsor.website && sponsor.website !== "no sit" && (
+                      {sponsor.website_url && (
                         <a
-                          href={sponsor.website}
+                          href={sponsor.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 underline text-sm flex items-center gap-1"
