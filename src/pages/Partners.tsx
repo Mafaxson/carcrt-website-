@@ -80,7 +80,7 @@ export default function Partners() {
                 <Button className="mt-3" onClick={() => navigate("/partners/restoring-agrisolution-enterprises")}>
                   View Details
                 </Button>
-                // ...existing code...
+                
               </div>
             </div>
           </div>
