@@ -39,13 +39,6 @@ export default function Partners() {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-hero">
         <div className="container-custom">
-          <div className="flex flex-col items-center mb-4">
-            <img
-              src={partners[0].logo.startsWith("http") ? partners[0].logo : getImageUrl(partners[0].logo)}
-              alt="Restoring AgriSolution Enterprises logo"
-              className="w-36 h-36 object-cover rounded-full border-4 border-blue-200 shadow-lg mb-4"
-            />
-          </div>
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
               Partners & <span className="gradient-text">Sponsors</span>
