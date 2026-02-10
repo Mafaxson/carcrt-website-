@@ -21,14 +21,15 @@ export default function Partners() {
       const { data, error } = await supabase.from('partners').select('*');
       if (!error && data && data.length > 0) {
         setPartners(data);
+        // Restore affiliate partner (Restoring AgriSolution Enterprises)
+        const affiliate = data.find(p => p.type === 'affiliate');
+        setRestoringAgri(affiliate || null);
       } else {
         setPartners([]);
+        setRestoringAgri(null);
       }
     };
     fetchPartners();
-    // Optionally, fetch affiliate/Restoring AgriSolution from Supabase
-    // If you want to migrate this as well, filter for affiliate
-    // setRestoringAgri(data.find(p => p.type === 'affiliate'));
   }, []);
   return (
     <Layout>
