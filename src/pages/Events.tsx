@@ -11,7 +11,6 @@ import { Calendar, MapPin, Clock, Users, X, ArrowRight, Download } from "lucide-
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/lib/supabaseClient";
-import { getImageUrl } from "@/lib/imageUtils";
 import { toast } from "@/hooks/use-toast";
 
 const eventStatuses = ["All", "Upcoming", "Ongoing", "Past"];
@@ -32,27 +31,18 @@ export default function Events() {
   });
 
   useEffect(() => {
-    // Only show the four original events from local JSON
-    fetch('/data/events.json')
-      .then((res) => res.json())
-      .then((json) => {
-        // Map fields to expected frontend structure
-        const mapped = json.map(event => ({
-          ...event,
-          date: event.dateFrom || event.date || "",
-          time: event.time || "",
-          status: event.status || "upcoming",
-          application_pdf: event.applicationPdf || event.application_pdf || "",
-          registration_link: event.registrationLink || event.registration_link || "",
-        }));
-        setAllEvents(mapped);
-        setFilteredEvents(mapped);
-      })
-      .catch((err) => {
-        console.error('Error loading events.json:', err);
+    // Fetch events from Supabase
+    const fetchEvents = async () => {
+      const { data, error } = await supabase.from('events').select('*');
+      if (!error && data) {
+        setAllEvents(data);
+        setFilteredEvents(data);
+      } else {
         setAllEvents([]);
         setFilteredEvents([]);
-      });
+      }
+    };
+    fetchEvents();
   }, []);
 
   useEffect(() => {
