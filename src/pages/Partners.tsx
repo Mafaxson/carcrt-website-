@@ -8,7 +8,7 @@ import { useState } from "react";
 import { getImageUrl } from "@/lib/imageUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 
 const partners = [
   {
