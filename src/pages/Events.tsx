@@ -11,6 +11,7 @@ import { Calendar, MapPin, Clock, Users, X, ArrowRight, Download } from "lucide-
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/lib/supabaseClient";
+import { getImageUrl } from "@/lib/imageUtils";
 import { toast } from "@/hooks/use-toast";
 
 const eventStatuses = ["All", "Upcoming", "Ongoing", "Past"];
