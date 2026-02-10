@@ -80,24 +80,7 @@ export default function Partners() {
                 <Button className="mt-3" onClick={() => navigate("/partners/restoring-agrisolution-enterprises")}>
                   View Details
                 </Button>
-                {/* Gallery Section */}
-                <div className="mt-6">
-                  <h4 className="font-heading font-semibold mb-2">Gallery</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {affiliate.gallery.map((item, idx) => (
-                      <div key={idx} className="rounded-lg overflow-hidden shadow">
-                        <img
-                          src={item.image}
-                          alt={item.caption}
-                          className="w-full h-32 object-cover"
-                        />
-                        <div className="p-2 text-xs text-muted-foreground text-center">
-                          {item.caption}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                // ...existing code...
               </div>
             </div>
           </div>
