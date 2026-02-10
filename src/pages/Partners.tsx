@@ -53,22 +53,24 @@ export default function Partners() {
       {affiliate && (
         <section className="section-padding bg-background">
           <div className="container-custom">
-            <SectionHeader
-              title={affiliate.name}
-              subtitle="Community-based organization we're supporting to drive transformation"
-            />
-            <div className="flex flex-col md:flex-row gap-8 items-center mb-4">
+            <div className="flex flex-col items-center mb-4">
               {affiliate.logo ? (
                 <img
                   src={affiliate.logo.startsWith("http") ? affiliate.logo : getImageUrl(affiliate.logo)}
                   alt={affiliate.name + " logo"}
-                  className="w-32 h-32 object-cover rounded-full border mb-4 md:mb-0"
+                  className="w-36 h-36 object-cover rounded-full border-4 border-blue-200 shadow-lg mb-4"
                 />
               ) : (
-                <div className="w-32 h-32 flex items-center justify-center bg-muted rounded-full border mb-4 md:mb-0">
+                <div className="w-36 h-36 flex items-center justify-center bg-muted rounded-full border-4 border-blue-200 shadow-lg mb-4">
                   <span className="text-xs text-muted-foreground text-center">No Logo</span>
                 </div>
               )}
+              <SectionHeader
+                title={affiliate.name}
+                subtitle="Community-based organization we're supporting to drive transformation"
+              />
+            </div>
+            <div className="flex flex-col md:flex-row gap-8 items-center mb-4">
               <div className="flex-1">
                 <div className="inline-block px-3 py-1 mb-2 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
                   Affiliate Partner
@@ -77,10 +79,9 @@ export default function Partners() {
                 <div className="text-sm text-muted-foreground mb-1">
                   <b>Focus:</b> {affiliate.focus}
                 </div>
-                <Button className="mt-3" onClick={() => navigate("/partners/restoring-agrisolution-enterprises")}>
+                <Button className="mt-3" onClick={() => navigate("/partners/restoring-agrisolution-enterprises")}> 
                   View Details
                 </Button>
-                
               </div>
             </div>
           </div>
