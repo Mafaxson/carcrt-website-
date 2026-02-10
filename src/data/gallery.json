@@ -1,0 +1,8 @@
+[
+  { "id": 1, "image": "/gallery/restoring-agri-1.jpg", "caption": "Pepper" },
+  { "id": 2, "image": "/gallery/restoring-agri-2.jpg", "caption": "Ploughing" },
+  { "id": 3, "image": "/gallery/restoring-agri-3.jpg", "caption": "Potato garden" },
+  { "id": 4, "image": "/gallery/restoring-agri-4.jpg", "caption": "Watering" },
+  { "id": 5, "image": "/gallery/restoring-agri-5.jpg", "caption": "Fresh Pineapple" },
+  { "id": 6, "image": "/gallery/restoring-agri-6.jpg", "caption": "Community outreach" }
+]
