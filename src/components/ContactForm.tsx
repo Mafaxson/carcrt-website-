@@ -14,7 +14,6 @@ export default function ContactForm() {
     setError(null);
     setSuccess(false);
     setLoading(true);
-
     const payload = {
       name: name || null,
       email: email || null,
@@ -22,8 +21,25 @@ export default function ContactForm() {
     };
 
     try {
-      const { error } = await supabase.from("contacts").insert([payload]);
+      const { data, error } = await supabase.from("contacts").insert([payload]).select();
       if (error) throw error;
+      const inserted = data && data[0];
+      if (!inserted || !inserted.id) throw new Error("Inserted record not returned");
+
+      // Call Edge Function to send email (function URL from env)
+      const functionUrl = import.meta.env.VITE_SEND_EMAIL_FUNCTION_URL as string;
+      if (!functionUrl) throw new Error("Missing VITE_SEND_EMAIL_FUNCTION_URL environment variable");
+
+      const fnRes = await fetch(functionUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "contacts", id: inserted.id }),
+      });
+      if (!fnRes.ok) {
+        const text = await fnRes.text();
+        throw new Error(`Email function error: ${text}`);
+      }
+
       setSuccess(true);
       setName("");
       setEmail("");
