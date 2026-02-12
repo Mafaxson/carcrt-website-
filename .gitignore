@@ -1,3 +1,15 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+/.supabase
+/supabase/.netlify
+/.idea
+.vscode/
+*.log
+/.cache
 # Logs
 logs
 *.log
