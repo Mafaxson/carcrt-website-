@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import DebugPanel from "@/components/DebugPanel";
 
 export default function VolunteerForm() {
   const [fullName, setFullName] = useState("");
@@ -9,6 +10,7 @@ export default function VolunteerForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [debug, setDebug] = useState<any>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,6 +27,8 @@ export default function VolunteerForm() {
 
     try {
       const { data, error } = await supabase.from("volunteers").insert([payload]).select();
+      console.log("supabase insert volunteers result:", { data, error });
+      setDebug({ step: "insert", data, error });
       if (error) throw error;
       const inserted = data && data[0];
       if (!inserted || !inserted.id) throw new Error("Inserted record not returned");
@@ -37,9 +41,10 @@ export default function VolunteerForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "volunteers", id: inserted.id }),
       });
+      const fnText = await fnRes.text();
+      setDebug((d: any) => ({ ...d, step: "function", status: fnRes.status, body: fnText }));
       if (!fnRes.ok) {
-        const text = await fnRes.text();
-        throw new Error(`Email function error: ${text}`);
+        throw new Error(`Email function error: ${fnText}`);
       }
 
       setSuccess(true);
@@ -48,6 +53,7 @@ export default function VolunteerForm() {
       setPhone("");
       setInterests("");
     } catch (err: any) {
+      console.error("VolunteerForm error:", err);
       setError(err.message || "Failed to submit volunteer application.");
     } finally {
       setLoading(false);
@@ -77,6 +83,7 @@ export default function VolunteerForm() {
       <button disabled={loading} type="submit" className="px-4 py-2 bg-blue-600 text-white">
         {loading ? "Submitting..." : "Apply to Volunteer"}
       </button>
+      <DebugPanel data={debug} onClose={() => setDebug(null)} />
     </form>
   );
 }

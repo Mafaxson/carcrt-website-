@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import DebugPanel from "@/components/DebugPanel";
 
 export default function DonationForm() {
   const [donorName, setDonorName] = useState("");
@@ -9,6 +10,7 @@ export default function DonationForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [debug, setDebug] = useState<any>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,6 +29,8 @@ export default function DonationForm() {
 
     try {
       const { data, error } = await supabase.from("donations").insert([payload]).select();
+      console.log("supabase insert donations result:", { data, error });
+      setDebug({ step: "insert", data, error });
       if (error) throw error;
       const inserted = data && data[0];
       if (!inserted || !inserted.id) throw new Error("Inserted record not returned");
@@ -39,9 +43,10 @@ export default function DonationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "donations", id: inserted.id }),
       });
+      const fnText = await fnRes.text();
+      setDebug((d: any) => ({ ...d, step: "function", status: fnRes.status, body: fnText }));
       if (!fnRes.ok) {
-        const text = await fnRes.text();
-        throw new Error(`Email function error: ${text}`);
+        throw new Error(`Email function error: ${fnText}`);
       }
 
       setSuccess(true);
@@ -50,6 +55,7 @@ export default function DonationForm() {
       setAmount("");
       setMessage("");
     } catch (err: any) {
+      console.error("DonationForm error:", err);
       setError(err.message || "Failed to submit donation request.");
     } finally {
       setLoading(false);
@@ -79,6 +85,7 @@ export default function DonationForm() {
       <button disabled={loading} type="submit" className="px-4 py-2 bg-blue-600 text-white">
         {loading ? "Submitting..." : "Submit Donation"}
       </button>
+      <DebugPanel data={debug} onClose={() => setDebug(null)} />
     </form>
   );
 }
